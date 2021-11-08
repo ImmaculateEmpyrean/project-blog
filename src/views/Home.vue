@@ -1,6 +1,57 @@
 <template>
   <div class="home">
       <NavBar />
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
+      <h1>Hey!!</h1>
   </div>
 </template>
 

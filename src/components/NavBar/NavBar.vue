@@ -12,6 +12,16 @@ export default {
     name: "NavBar",
     components:{
         NavSearchBar
+    },
+    mounted(){
+        window.addEventListener('scroll',function(){
+            let scrolledY = window.pageYOffset;
+            if(scrolledY > 100){
+                this.$el.classList.add('minimize');
+            } else if(scrolledY < 100){
+                this.$el.classList.remove('minimize');
+            }
+        }.bind(this));
     }
 }
 </script>
@@ -20,8 +30,11 @@ export default {
     @use '../../assets/scss/setting' as *;
 
     nav{
+        transition: min-height 1s ease-in-out;
+
         display: flex;
         position: sticky;
+        top: 0;
 
         justify-content: space-between;
         align-items: center;
@@ -29,6 +42,10 @@ export default {
         padding: 0 var(--spacing-large);
 
         min-height: 150px;
+        &.minimize{
+            min-height: 75px;
+        }
+
         background: map-get($light,"light");
     }
 
