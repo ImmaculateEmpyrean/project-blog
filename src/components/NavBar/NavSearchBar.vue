@@ -3,14 +3,26 @@
     <div class="NavSearchBar">
         <div class="border"></div>
         <div class="borderCover"></div>
-        <input type="text" id="NavSearchBar" class="subtitle" placeholder="Visual-Novel">
+        <input  type="text" id="NavSearchBar" class="subtitle" placeholder="Visual-Novel"
+                @focus="searchFieldFocused" @blur="searchFieldLostFocus"
+        >
         <div class="NavSearchButton" id="NavSearchButton"><span class="iconify" data-icon="bx:bx-search-alt-2"></span></div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "NavSearchBar"
+    name: "NavSearchBar",
+    methods:{
+        searchFieldFocused(){
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.add('removeCover');
+        },
+        searchFieldLostFocus(){
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.remove('removeCover');
+        }
+    }
 }
 </script>
 
