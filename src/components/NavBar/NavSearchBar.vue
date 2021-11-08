@@ -17,10 +17,16 @@ export default {
         searchFieldFocused(){
             let borderCover = this.$el.querySelector('.borderCover');
             borderCover.classList.add('removeCover');
+
+            let navSearchBar = this.$el;
+            navSearchBar.classList.add('expand');
         },
         searchFieldLostFocus(){
             let borderCover = this.$el.querySelector('.borderCover');
             borderCover.classList.remove('removeCover');
+
+            let navSearchBar = this.$el;
+            navSearchBar.classList.remove('expand');
         }
     }
 }
@@ -30,7 +36,13 @@ export default {
     @use '../../assets/scss/setting' as *;
 
     .NavSearchBar{
+        transition: 1s ease-in-out flex;
+
         flex: 0 0 50%;
+        &.expand{
+            flex: 0 0 70%;
+        }
+
         position: relative;
         overflow-x: hidden;
 
