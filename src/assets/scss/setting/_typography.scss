@@ -1,0 +1,85 @@
+@use './breakpoints' as *;
+@use './color' as *;
+
+*{
+    --font-normal: 16px;
+    --font-large: 20px;
+    --font-larger: 28px;
+}
+
+@include for-tablet-portrait-up{
+    *{
+        --font-normal: 18px;
+        --font-large: 28px;
+        --font-larger: 40px;
+    }   
+}
+
+@include for-desktop-up{
+    *{
+        --font-normal: 20px;
+        --font-large: 28px;
+        --font-larger: 40px;
+    }
+}
+
+.heading1{
+    font-family: Anton;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--font-larger);
+    line-height: 41px;
+
+    letter-spacing: 0.155em;
+    text-transform: uppercase;
+
+    color: map-get($dark,"dark");
+
+    &.alternate-color{
+        color: map-get($light,"light");
+    }
+}
+
+.subtitle{
+    font-family: Merriweather;
+    font-style: normal;
+    font-weight: 300;
+    font-size: var(--font-large);
+    line-height: 25px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+
+    color: map-get($dark,"dark");
+
+    &.alternate-color{
+        color: map-get($light,"light");
+    }
+}
+
+.bodyText{
+    font-family: Signika;
+    font-style: normal;
+    font-weight: 300;
+    font-size: var(--font-normal);
+    line-height: 180%;
+    
+    letter-spacing: 0.02em;
+
+    color: map-get($dark,"dark");
+
+    &.alternate-color{
+        color: map-get($light,"light");
+    }
+}
+
+@include for-tablet-portrait-up{
+    .heading1{
+        line-height: 59px;
+        letter-spacing: 0.21em;
+    }
+
+    .subtitle{
+        line-height: 35px;
+        letter-spacing: 0.25em;
+    }
+}

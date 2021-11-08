@@ -1,0 +1,8 @@
+$widescreen-enabled: true;
+$fullhd-enabled: false;
+
+$tablet: 600px;
+$desktop: 1200px;
+$widescreen: 1800px;
+
+@import '~bulma/sass/grid/columns.sass';
