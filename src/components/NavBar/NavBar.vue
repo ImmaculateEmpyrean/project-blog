@@ -1,17 +1,34 @@
 <template>
     <nav id="NavBar">
         <router-link to="/" class="brandLogo">VN-Blog</router-link>
-        <NavSearchBar />
+        <NavSearchBar v-if="!isMobileWidth"/>
+        <NavSearchBarMobile v-if="isMobileWidth"/>
     </nav>
 </template>
 
 <script>
 import NavSearchBar from './NavSearchBar.vue'; 
+import NavSearchBarMobile from './NavSearchBar-Mobile.vue';
+
+import {minBreakpoints} from '@/javascript/breakpoints';
 
 export default {
     name: "NavBar",
     components:{
-        NavSearchBar
+        NavSearchBar,
+        NavSearchBarMobile
+    },
+    computed:{
+        isMobileWidth(){
+            if(parseInt(window.innerWidth) < minBreakpoints.forTabletPortraitUp){
+                 console.log('returning true?')
+                return true;
+            }
+            else{
+                console.log('returning false?')
+                return false;
+            } 
+        }
     },
     mounted(){
         window.addEventListener('scroll',function(){
@@ -31,6 +48,7 @@ export default {
 
     nav{
         transition: min-height 1s ease-in-out;
+        overflow-y: hidden;
 
         display: flex;
         position: sticky;
