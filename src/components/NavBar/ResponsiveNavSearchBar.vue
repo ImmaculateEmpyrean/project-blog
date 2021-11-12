@@ -117,13 +117,17 @@ export default {
         z-index: 3;
         overflow-x: hidden;
 
-        flex: 0 0 50%;
+        flex: 1 1 50%;
         &.expand{
             flex: 0 0 100%;
-            @include for-tablet-portrait-up{
+        }
+        @include for-tablet-portrait-up{
+            flex: 0 0 50%;
+            &.expand{
                 flex: 0 0 70%;
             }
         }
+        
 
         min-height: 58px;
 

@@ -34,7 +34,7 @@ export default {
                 this.showBrandLogo = true;
             }
         },
-        navSearchBarMinimize_complted(){
+        navSearchBarMinimize_completed(){
             if(isMobile()){
                 let nav = this.$el;
                 nav.style.justifyContent = "space-between";
@@ -63,6 +63,14 @@ export default {
                 this.$el.classList.remove('minimize');
             }
         }.bind(this));
+
+        //for bug fixing purpose as if window size changes without the input loosing focus.. then space-between is never set until refresh
+        window.addEventListener('resize',function(){
+            if(!isMobile()){
+                let nav = this.$el;
+                nav.style.justifyContent = "space-between";
+            }
+        }.bind(this))
     }
 }
 </script>
