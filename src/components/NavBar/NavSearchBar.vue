@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div id="searchIcon" class="icon-holder" 
-             @click="searchIconClicked"
+             @mousedown="searchIconClicked"
         >
             <span class="iconify icon" data-icon="bx:bx-search-alt-2"></span>
         </div>
@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import {isMobile} from '@/javascript/breakpoints.js';
-
 export default {
     name: "ResponsiveNavSearchBar",
     data(){
@@ -28,18 +26,12 @@ export default {
         search(){
             console.log('search performed on the nav search bar');
         },
-        searchIconClicked(){
-            if(isMobile()){
-                if(this.mobileHiddenRemoved === false){
-                    this.removeMobileHidden();
-                    this.$emit('navSearchBar:maximize_started');
-                }
-                else{
-                    this.search();
-                }
-            } else{
-                this.search();
-            }
+        searchIconClicked(e){
+            e.preventDefault();
+
+            if(this.mobileHiddenRemoved === false)
+                this.removeMobileHidden();
+            else this.search();
         },
 
 
@@ -51,7 +43,7 @@ export default {
             border.classList.add('mobile-hidden');
 
             let borderCover = this.$el.querySelector('.borderCover');
-            borderCover.classList.add('.mobile-hidden');
+            borderCover.classList.add('mobile-hidden');
 
             this.mobileHiddenRemoved = false;
         },
@@ -63,10 +55,11 @@ export default {
             border.classList.remove('mobile-hidden');
 
             let borderCover = this.$el.querySelector('.borderCover');
-            borderCover.classList.remove('.mobile-hidden');
+            borderCover.classList.remove('mobile-hidden');
 
             input.focus();
             this.mobileHiddenRemoved = true;
+            this.$emit('navSearchBar:maximize_started');
         },
 
 
@@ -76,6 +69,8 @@ export default {
 
             let navSearchBar = this.$el;
             navSearchBar.classList.add('expand');
+
+            this.removeMobileHidden();
         },
         searchFieldLostFocus(){
             let borderCover = this.$el.querySelector('.borderCover');

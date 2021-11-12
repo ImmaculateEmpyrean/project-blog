@@ -32,6 +32,7 @@ export default {
         navSearchBarMinimize_started(){
             if(isMobile()){
                 this.showBrandLogo = true;
+                console.log('minimize start')
             }
         },
         navSearchBarMinimize_completed(){
@@ -45,6 +46,8 @@ export default {
             if(isMobile()){
                 let nav = this.$el;
                 nav.style.justifyContent = "flex-end";
+
+                console.log('maximize start')
             }
         },
         navSearchBarMaximize_completed(){
