@@ -83,7 +83,10 @@ export default {
 
         padding: 0 var(--spacing-large);
 
-        min-height: 150px;
+        min-height: 100px;
+        @include for-tablet-portrait-up{
+            min-height: 150px;
+        }
         &.minimize{
             min-height: 75px;
         }

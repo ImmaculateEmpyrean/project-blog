@@ -137,6 +137,7 @@ export default {
                 height: 35px;
                 
                 color: $accent;
+                cursor: pointer;
             }
 
              z-index: 4;
