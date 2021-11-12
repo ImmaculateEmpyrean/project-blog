@@ -5,9 +5,11 @@
         >
             <span class="iconify icon" data-icon="bx:bx-search-alt-2"></span>
         </div>
-        <input type="text" id="NavSearchBar" class="subtitle hidden" placeholder="Visual-Novel">
-        <div class="border"></div>
-        <div class="borderCover"></div>
+        <input type="text" id="NavSearchBar" class="subtitle mobile-hidden" placeholder="Visual-Novel"
+               @focus="searchFieldFocused" @blur="searchFieldLostFocus"
+        >
+        <div class="border mobile-hidden"></div>
+        <div class="borderCover mobile-hidden"></div>
     </div>
 </template>
 
@@ -15,11 +17,40 @@
 export default {
     name: "ResponsiveNavSearchBar",
     methods:{
-        searchIconClicked(){
+        activateMobileHidden(){
             console.log('called')
 
-            let input = this.$el.querySelector('input')
-            input.classList.remove('hidden');
+            let input = this.$el.querySelector('input');
+            input.classList.remove('mobile-hidden');
+
+            let border = this.$el.querySelector('.border');
+            border.classList.remove('mobile-hidden');
+
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.remove('.borderCover');
+
+            input.focus();
+        },
+        removeMobileHidden(){
+
+        },
+
+
+         searchFieldFocused(){
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.add('removeCover');
+
+            let navSearchBar = this.$el;
+            navSearchBar.classList.add('expand');
+        },
+        searchFieldLostFocus(){
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.remove('removeCover');
+
+            let navSearchBar = this.$el;
+            navSearchBar.classList.remove('expand');
+
+            console.log('searchField Lost Focus')
         }
     }
 }
@@ -43,10 +74,12 @@ export default {
             }
         }
 
+        min-height: 58px;
+
         .icon-holder{
             position: absolute;
             right: 0;
-            top : 5px;
+            top : 20%;
 
             svg{
                 width : 35px;
@@ -54,38 +87,101 @@ export default {
                 
                 color: $accent;
             }
+
+             z-index: 4;
         }
 
         input{
-            transition: 2s width ease-in-out, 
-                        2s padding ease-in-out;
+            transition: 1s width ease-in-out, 
+                        1s padding ease-in-out;
 
             border: none;
             outline: none;
 
-            width: 100%;
-            
-            height: 45px;
-            padding: 10px 0;
-            padding-right: 65px;
-            padding-left: 10px;
+            width: calc(100% - 2px);
+            padding: 10px;
+            padding-right: 51px;
+
             margin-left: auto;
 
-            &.hidden{
+            //all these so that the border can remain visible
+            margin-right: 1px;
+            margin-top: 1px;
+            margin-bottom: 1px;
+
+            &.mobile-hidden{
                 width: 0;
                 padding-left: 0;
                 padding-right: 0;
             }
             @include for-tablet-portrait-up{
-                &.hidden{
-                    width: 100%;
+                &.mobile-hidden{
+                    width: calc(100% - 2px);
 
-                    padding: 10px 0;
-                    padding-right: 65px;
+                    padding-right: 51px;
                     padding-left: 10px;
                 }
             }
 
+            z-index: 3;
+        }
+    }
+
+    .main{
+        .border{
+            transition: 1s width ease-in-out;
+
+            position: absolute;
+            border: 1px solid $accent;
+
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+
+             &.mobile-hidden{
+                width: 0%;
+                height: 0%;
+            }
+            @include for-tablet-portrait-up{
+                &.mobile-hidden{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            z-index: 1;
+        }
+        .borderCover{
+            transition: 1s ease-in-out transform,
+                        1s ease-in-out width;
+
+            position: absolute;
+            border: 1px solid white;
+
+            top: 0;
+            right: 0;
+            width: 100%;
+
+            &.mobile-hidden{
+                width: 0%;
+                height: 0%;
+            }
+            @include for-tablet-portrait-up{
+                &.mobile-hidden{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            height: 100%;
+            z-index: 2;
+
+            background-color: white;
+
+            &.removeCover{
+                transform: translateX(110%);
+            }
         }
     }
 </style>
