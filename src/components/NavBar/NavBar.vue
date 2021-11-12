@@ -7,7 +7,8 @@
         <div class="navFiller"></div>
 
         <ResponsiveNavSearchBar 
-         @navSearchBar:maximize="navSearchBarMaximize" @navSearchBar:minimize="navSearchBarMinimize"
+         @navSearchBar:maximize_started="navSearchBarMaximize_started" @navSearchBar:maximize_completed="navSearchBarMaximize_completed"
+         @navSearchBar:minimize_started="navSearchBarMinimize_started" @navSearchBar:minimize_completed="navSearchBarMinimize_completed"
         />       
     </nav>
 </template>
@@ -28,18 +29,30 @@ export default {
         }
     },
     methods:{
-        navSearchBarMinimize(){
+        navSearchBarMinimize_started(){
+            if(isMobile()){
+                this.showBrandLogo = true;
+            }
+        },
+        navSearchBarMinimize_complted(){
             if(isMobile()){
                 let nav = this.$el;
                 nav.style.justifyContent = "space-between";
             }
         },
-        navSearchBarMaximize(){
+
+        navSearchBarMaximize_started(){
             if(isMobile()){
                 let nav = this.$el;
                 nav.style.justifyContent = "flex-end";
             }
+        },
+        navSearchBarMaximize_completed(){
+            if(isMobile()){
+                this.showBrandLogo = false;
+            }
         }
+
     },
     mounted(){
         window.addEventListener('scroll',function(){

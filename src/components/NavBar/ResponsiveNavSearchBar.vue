@@ -32,7 +32,7 @@ export default {
             if(isMobile()){
                 if(this.mobileHiddenRemoved === false){
                     this.removeMobileHidden();
-                    this.$emit('navSearchBar:maximize');
+                    this.$emit('navSearchBar:maximize_started');
                 }
                 else{
                     this.search();
@@ -85,18 +85,20 @@ export default {
             navSearchBar.classList.remove('expand');
 
             this.activateMobileHidden();
-            //minimized event is not emited here as the event is emited after the minimization is complete.
+            this.$emit('navSearchBar:minimize_started');
         }
     },
     mounted(){
         let input = this.$el.querySelector('input');
             input.addEventListener('transitionend',function(e){
                 if(e.propertyName === 'width'){
-                    if(this.searchBarMinimized === true)
+                    if(this.searchBarMinimized === true){
                         this.searchBarMinimized = false;
+                        this.$emit('navSearchBar:maximize_completed');
+                    }
                     else{
                         this.searchBarMinimized = true;
-                        this.$emit('navSearchBar:minimize');
+                        this.$emit('navSearchBar:minimize_completed');
                     }
                 }
             }.bind(this));
