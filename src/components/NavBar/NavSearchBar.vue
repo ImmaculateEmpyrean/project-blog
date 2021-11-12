@@ -19,7 +19,6 @@ export default {
     data(){
         return{
             mobileHiddenRemoved: false,
-            searchBarMinimized: true
         }
     },
     methods:{
@@ -87,14 +86,14 @@ export default {
         let input = this.$el.querySelector('input');
             input.addEventListener('transitionend',function(e){
                 if(e.propertyName === 'width'){
-                    if(this.searchBarMinimized === true){
-                        this.searchBarMinimized = false;
-                        this.$emit('navSearchBar:maximize_completed');
-                    }
-                    else{
-                        this.searchBarMinimized = true;
+                    let input = e.target;
+                    let inputStyle = window.getComputedStyle(input);
+                    let width = parseInt(inputStyle.width);
+                    
+                    if(width === 0){
                         this.$emit('navSearchBar:minimize_completed');
                     }
+                    else this.$emit('navSearchBar:maximize_completed'); 
                 }
             }.bind(this));
     }

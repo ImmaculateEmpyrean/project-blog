@@ -39,6 +39,8 @@ export default {
             if(isMobile()){
                 let nav = this.$el;
                 nav.style.justifyContent = "space-between";
+
+                console.log('minimize completed')
             }
         },
 
@@ -53,6 +55,7 @@ export default {
         navSearchBarMaximize_completed(){
             if(isMobile()){
                 this.showBrandLogo = false;
+                console.log('maximize completed')
             }
         }
 
