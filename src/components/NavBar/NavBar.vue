@@ -2,7 +2,7 @@
     <nav id="NavBar">
         <router-link to="/" class="brandLogo" id="brandLogo"
          v-show="showBrandLogo"
-        >VN-Blog</router-link>
+        ><img :src="require('../../assets/img/logo.svg')" alt="brand-logo"></router-link>
 
         <div class="navFiller"></div>
 
@@ -30,41 +30,14 @@ export default {
     methods:{
         navSearchBarMinimize(){
             if(isMobile()){
-                this.showBrandLogo = true;
-
-                let navFiller = this.$el.querySelector('.navFiller');
-                navFiller.classList.remove("fillScreen");
-                navFiller.classList.add('clearScreen');
-
-                navFiller.addEventListener('animationend',function(){
-                    let nav = this.$el;
-                    nav.style.justifyContent = "space-between";
-                })
-
-                
-                
-                // let navFiller = this.$el.querySelector('.navFiller');
-                // navFiller.addEventListener('animationend',function(){
-                //     console.log('animation started')
-                //     this.showBrandLogo = true;
-                // }.bind(this));
-
-                // navFiller.classList.remove("fillScreen");
-                // navFiller.classList.add("clearScreen");
+                let nav = this.$el;
+                nav.style.justifyContent = "space-between";
             }
         },
         navSearchBarMaximize(){
             if(isMobile()){
-                let navFiller = this.$el.querySelector('.navFiller');
-                navFiller.classList.remove("clearScreen");
-                navFiller.classList.add("fillScreen");
-
                 let nav = this.$el;
                 nav.style.justifyContent = "flex-end";
-
-                navFiller.addEventListener('animationend',function(){
-                    this.showBrandLogo = false;
-                }.bind(this));
             }
         }
     },

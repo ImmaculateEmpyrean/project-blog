@@ -20,7 +20,8 @@ export default {
     name: "ResponsiveNavSearchBar",
     data(){
         return{
-            mobileHiddenRemoved: false
+            mobileHiddenRemoved: false,
+            searchBarMinimized: true
         }
     },
     methods:{
@@ -50,7 +51,7 @@ export default {
             border.classList.add('mobile-hidden');
 
             let borderCover = this.$el.querySelector('.borderCover');
-            borderCover.classList.add('.borderCover');
+            borderCover.classList.add('.mobile-hidden');
 
             this.mobileHiddenRemoved = false;
         },
@@ -62,7 +63,7 @@ export default {
             border.classList.remove('mobile-hidden');
 
             let borderCover = this.$el.querySelector('.borderCover');
-            borderCover.classList.remove('.borderCover');
+            borderCover.classList.remove('.mobile-hidden');
 
             input.focus();
             this.mobileHiddenRemoved = true;
@@ -84,8 +85,21 @@ export default {
             navSearchBar.classList.remove('expand');
 
             this.activateMobileHidden();
-            this.$emit('navSearchBar:minimize');
+            //minimized event is not emited here as the event is emited after the minimization is complete.
         }
+    },
+    mounted(){
+        let input = this.$el.querySelector('input');
+            input.addEventListener('transitionend',function(e){
+                if(e.propertyName === 'width'){
+                    if(this.searchBarMinimized === true)
+                        this.searchBarMinimized = false;
+                    else{
+                        this.searchBarMinimized = true;
+                        this.$emit('navSearchBar:minimize');
+                    }
+                }
+            }.bind(this));
     }
 }
 </script>
