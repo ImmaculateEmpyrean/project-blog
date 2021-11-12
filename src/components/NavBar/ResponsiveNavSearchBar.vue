@@ -14,12 +14,47 @@
 </template>
 
 <script>
+import {isMobile} from '@/javascript/breakpoints.js';
+
 export default {
     name: "ResponsiveNavSearchBar",
+    data(){
+        return{
+            mobileHiddenRemoved: false
+        }
+    },
     methods:{
-        activateMobileHidden(){
-            console.log('called')
+        search(){
+            console.log('search performed on the nav search bar');
+        },
+        searchIconClicked(){
+            if(isMobile()){
+                if(this.mobileHiddenRemoved === false){
+                    this.removeMobileHidden();
+                    this.$emit('navSearchBar:maximize');
+                }
+                else{
+                    this.search();
+                }
+            } else{
+                this.search();
+            }
+        },
 
+
+        activateMobileHidden(){
+            let input = this.$el.querySelector('input');
+            input.classList.add('mobile-hidden');
+
+            let border = this.$el.querySelector('.border');
+            border.classList.add('mobile-hidden');
+
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.add('.borderCover');
+
+            this.mobileHiddenRemoved = false;
+        },
+        removeMobileHidden(){
             let input = this.$el.querySelector('input');
             input.classList.remove('mobile-hidden');
 
@@ -30,13 +65,11 @@ export default {
             borderCover.classList.remove('.borderCover');
 
             input.focus();
-        },
-        removeMobileHidden(){
-
+            this.mobileHiddenRemoved = true;
         },
 
 
-         searchFieldFocused(){
+        searchFieldFocused(){
             let borderCover = this.$el.querySelector('.borderCover');
             borderCover.classList.add('removeCover');
 
@@ -50,7 +83,8 @@ export default {
             let navSearchBar = this.$el;
             navSearchBar.classList.remove('expand');
 
-            console.log('searchField Lost Focus')
+            this.activateMobileHidden();
+            this.$emit('navSearchBar:minimize');
         }
     }
 }

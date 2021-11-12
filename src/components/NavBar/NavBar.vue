@@ -1,30 +1,33 @@
 <template>
     <nav id="NavBar">
-        <router-link to="/" class="brandLogo">VN-Blog</router-link>
-        <ResponsiveNavSearchBar />       
+        <router-link to="/" class="brandLogo" id="brandLogo">VN-Blog</router-link>
+        <ResponsiveNavSearchBar 
+         @navSearchBar:maximize="navSearchBarMaximize" @navSearchBar:minimize="navSearchBarMinimize"/>       
     </nav>
 </template>
 
 <script>
 import ResponsiveNavSearchBar from './ResponsiveNavSearchBar.vue';
 
-import {minBreakpoints} from '@/javascript/breakpoints';
+import {isMobile} from '@/javascript/breakpoints';
 
 export default {
     name: "NavBar",
     components:{
         ResponsiveNavSearchBar
     },
-    computed:{
-        isMobileWidth(){
-            if(parseInt(window.innerWidth) < minBreakpoints.forTabletPortraitUp){
-                 console.log('returning true?')
-                return true;
+    methods:{
+        navSearchBarMinimize(){
+            if(isMobile()){
+                let brandLogo = document.getElementById('brandLogo');
+                brandLogo.style.display = "";
             }
-            else{
-                console.log('returning false?')
-                return false;
-            } 
+        },
+        navSearchBarMaximize(){
+            if(isMobile()){
+                let brandLogo = document.getElementById('brandLogo');
+                brandLogo.style.display = "none";
+            }
         }
     },
     mounted(){

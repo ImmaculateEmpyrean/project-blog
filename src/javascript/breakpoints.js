@@ -4,3 +4,9 @@ export let minBreakpoints = {
     forDesktopUp: 1200,
     forBigDesktopUp: 1800 
 }
+
+export function isMobile(){
+    if(parseInt(window.innerWidth) >= minBreakpoints.forTabletPortraitUp)
+        return false;
+    else return true;
+}
