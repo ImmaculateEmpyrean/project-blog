@@ -30,12 +30,33 @@ export default {
     methods:{
         navSearchBarMinimize(){
             if(isMobile()){
-                // this.showBrandLogo = false;
+                this.showBrandLogo = true;
+
+                let navFiller = this.$el.querySelector('.navFiller');
+                navFiller.classList.remove("fillScreen");
+                navFiller.classList.add('clearScreen');
+
+                navFiller.addEventListener('animationend',function(){
+                    let nav = this.$el;
+                    nav.style.justifyContent = "space-between";
+                })
+
+                
+                
+                // let navFiller = this.$el.querySelector('.navFiller');
+                // navFiller.addEventListener('animationend',function(){
+                //     console.log('animation started')
+                //     this.showBrandLogo = true;
+                // }.bind(this));
+
+                // navFiller.classList.remove("fillScreen");
+                // navFiller.classList.add("clearScreen");
             }
         },
         navSearchBarMaximize(){
             if(isMobile()){
                 let navFiller = this.$el.querySelector('.navFiller');
+                navFiller.classList.remove("clearScreen");
                 navFiller.classList.add("fillScreen");
 
                 let nav = this.$el;
@@ -113,7 +134,7 @@ export default {
             animation-duration: 1s;
             animation-fill-mode: both;
             animation-timing-function: ease-out;
-            animation-direction: backwards;
+            animation-direction: reverse;
         }
 
         z-index: 2;
