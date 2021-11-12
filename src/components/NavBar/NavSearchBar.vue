@@ -1,19 +1,75 @@
-<!--this is the DESKTOP version of the component -->
 <template>
-    <div class="NavSearchBar">
-        <div class="border"></div>
-        <div class="borderCover"></div>
-        <input  type="text" id="NavSearchBar" class="subtitle" placeholder="Visual-Novel"
-                @focus="searchFieldFocused" @blur="searchFieldLostFocus"
+    <div class="main">
+        <div id="searchIcon" class="icon-holder" 
+             @click="searchIconClicked"
         >
-        <div class="NavSearchButton" id="NavSearchButton"><span class="iconify" data-icon="bx:bx-search-alt-2"></span></div>
+            <span class="iconify icon" data-icon="bx:bx-search-alt-2"></span>
+        </div>
+        <input type="text" id="NavSearchBar" class="subtitle mobile-hidden" placeholder="Visual-Novel"
+               @focus="searchFieldFocused" @blur="searchFieldLostFocus"
+        >
+        <div class="border mobile-hidden"></div>
+        <div class="borderCover mobile-hidden"></div>
     </div>
 </template>
 
 <script>
+import {isMobile} from '@/javascript/breakpoints.js';
+
 export default {
-    name: "NavSearchBar",
+    name: "ResponsiveNavSearchBar",
+    data(){
+        return{
+            mobileHiddenRemoved: false,
+            searchBarMinimized: true
+        }
+    },
     methods:{
+        search(){
+            console.log('search performed on the nav search bar');
+        },
+        searchIconClicked(){
+            if(isMobile()){
+                if(this.mobileHiddenRemoved === false){
+                    this.removeMobileHidden();
+                    this.$emit('navSearchBar:maximize_started');
+                }
+                else{
+                    this.search();
+                }
+            } else{
+                this.search();
+            }
+        },
+
+
+        activateMobileHidden(){
+            let input = this.$el.querySelector('input');
+            input.classList.add('mobile-hidden');
+
+            let border = this.$el.querySelector('.border');
+            border.classList.add('mobile-hidden');
+
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.add('.mobile-hidden');
+
+            this.mobileHiddenRemoved = false;
+        },
+        removeMobileHidden(){
+            let input = this.$el.querySelector('input');
+            input.classList.remove('mobile-hidden');
+
+            let border = this.$el.querySelector('.border');
+            border.classList.remove('mobile-hidden');
+
+            let borderCover = this.$el.querySelector('.borderCover');
+            borderCover.classList.remove('.mobile-hidden');
+
+            input.focus();
+            this.mobileHiddenRemoved = true;
+        },
+
+
         searchFieldFocused(){
             let borderCover = this.$el.querySelector('.borderCover');
             borderCover.classList.add('removeCover');
@@ -27,7 +83,25 @@ export default {
 
             let navSearchBar = this.$el;
             navSearchBar.classList.remove('expand');
+
+            this.activateMobileHidden();
+            this.$emit('navSearchBar:minimize_started');
         }
+    },
+    mounted(){
+        let input = this.$el.querySelector('input');
+            input.addEventListener('transitionend',function(e){
+                if(e.propertyName === 'width'){
+                    if(this.searchBarMinimized === true){
+                        this.searchBarMinimized = false;
+                        this.$emit('navSearchBar:maximize_completed');
+                    }
+                    else{
+                        this.searchBarMinimized = true;
+                        this.$emit('navSearchBar:minimize_completed');
+                    }
+                }
+            }.bind(this));
     }
 }
 </script>
@@ -35,37 +109,127 @@ export default {
 <style lang="scss" scoped>
     @use '../../assets/scss/setting' as *;
 
-    .NavSearchBar{
+    .main{
         transition: 1s ease-in-out flex;
 
-        flex: 0 0 50%;
-        &.expand{
-            flex: 0 0 70%;
-        }
-
+        display: flex;
         position: relative;
+        z-index: 3;
         overflow-x: hidden;
 
+        flex: 1 1 50%;
+        &.expand{
+            flex: 0 0 100%;
+        }
+        @include for-tablet-portrait-up{
+            flex: 0 0 50%;
+            &.expand{
+                flex: 0 0 70%;
+            }
+        }
+        
+
+        min-height: 58px;
+
+        .icon-holder{
+            position: absolute;
+            right: 0;
+            top : 20%;
+
+            svg{
+                width : 35px;
+                height: 35px;
+                
+                color: $accent;
+                cursor: pointer;
+            }
+
+             z-index: 4;
+        }
+
+        input{
+            transition: 1s width ease-in-out, 
+                        1s padding ease-in-out;
+
+            border: none;
+            outline: none;
+
+            width: calc(100% - 2px);
+            padding: 10px;
+            padding-right: 51px;
+
+            margin-left: auto;
+
+            //all these so that the border can remain visible
+            margin-right: 1px;
+            margin-top: 1px;
+            margin-bottom: 1px;
+
+            &.mobile-hidden{
+                width: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            @include for-tablet-portrait-up{
+                &.mobile-hidden{
+                    width: calc(100% - 2px);
+
+                    padding-right: 51px;
+                    padding-left: 10px;
+                }
+            }
+
+            z-index: 3;
+        }
+    }
+
+    .main{
         .border{
+            transition: 1s width ease-in-out;
+
             position: absolute;
             border: 1px solid $accent;
 
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             height: 100%;
+
+             &.mobile-hidden{
+                width: 0%;
+                height: 0%;
+            }
+            @include for-tablet-portrait-up{
+                &.mobile-hidden{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
 
             z-index: 1;
         }
         .borderCover{
-            transition: 1s ease-in-out transform;
+            transition: 1s ease-in-out transform,
+                        1s ease-in-out width;
 
             position: absolute;
             border: 1px solid white;
 
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
+
+            &.mobile-hidden{
+                width: 0%;
+                height: 0%;
+            }
+            @include for-tablet-portrait-up{
+                &.mobile-hidden{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
             height: 100%;
             z-index: 2;
 
@@ -74,40 +238,6 @@ export default {
             &.removeCover{
                 transform: translateX(110%);
             }
-        }
-
-        input{
-            position: relative;
-
-            width: calc(100% - 2px);
-            padding: 10px;
-            padding-right: 51px;
-
-            margin: 1px;
-
-            border: none;
-            outline: none;
-
-            z-index: 3;
-        }
-
-        .NavSearchButton{
-            position: absolute;
-            right: 6px;
-            top: 10px;
-            width: 47px;
-
-            display: flex;
-            justify-content: flex-end;
-
-            svg{
-                width: 35px;
-                height: 35px;
-                background-color: white;
-                color: $accent;
-            }
-
-            z-index: 4;
         }
     }
 </style>

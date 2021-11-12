@@ -6,7 +6,7 @@
 
         <div class="navFiller"></div>
 
-        <ResponsiveNavSearchBar 
+        <NavSearchBar
          @navSearchBar:maximize_started="navSearchBarMaximize_started" @navSearchBar:maximize_completed="navSearchBarMaximize_completed"
          @navSearchBar:minimize_started="navSearchBarMinimize_started" @navSearchBar:minimize_completed="navSearchBarMinimize_completed"
         />       
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import ResponsiveNavSearchBar from './ResponsiveNavSearchBar.vue';
+import NavSearchBar from './NavSearchBar.vue';
 
 import {isMobile} from '@/javascript/breakpoints';
 
 export default {
     name: "NavBar",
     components:{
-        ResponsiveNavSearchBar
+        NavSearchBar
     },
     data(){
         return{
