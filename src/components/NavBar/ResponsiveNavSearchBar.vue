@@ -98,6 +98,7 @@ export default {
 
         display: flex;
         position: relative;
+        z-index: 3;
         overflow-x: hidden;
 
         flex: 0 0 50%;

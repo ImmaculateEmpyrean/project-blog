@@ -1,8 +1,14 @@
 <template>
     <nav id="NavBar">
-        <router-link to="/" class="brandLogo" id="brandLogo">VN-Blog</router-link>
+        <router-link to="/" class="brandLogo" id="brandLogo"
+         v-show="showBrandLogo"
+        >VN-Blog</router-link>
+
+        <div class="navFiller"></div>
+
         <ResponsiveNavSearchBar 
-         @navSearchBar:maximize="navSearchBarMaximize" @navSearchBar:minimize="navSearchBarMinimize"/>       
+         @navSearchBar:maximize="navSearchBarMaximize" @navSearchBar:minimize="navSearchBarMinimize"
+        />       
     </nav>
 </template>
 
@@ -16,17 +22,28 @@ export default {
     components:{
         ResponsiveNavSearchBar
     },
+    data(){
+        return{
+            showBrandLogo: true
+        }
+    },
     methods:{
         navSearchBarMinimize(){
             if(isMobile()){
-                let brandLogo = document.getElementById('brandLogo');
-                brandLogo.style.display = "";
+                // this.showBrandLogo = false;
             }
         },
         navSearchBarMaximize(){
             if(isMobile()){
-                let brandLogo = document.getElementById('brandLogo');
-                brandLogo.style.display = "none";
+                let navFiller = this.$el.querySelector('.navFiller');
+                navFiller.classList.add("fillScreen");
+
+                let nav = this.$el;
+                nav.style.justifyContent = "flex-end";
+
+                navFiller.addEventListener('animationend',function(){
+                    this.showBrandLogo = false;
+                }.bind(this));
             }
         }
     },
@@ -68,6 +85,9 @@ export default {
     }
 
     .brandLogo{
+        position: relative;
+        z-index: 1;
+
         font-family: Permanent Marker, cursive;
         font-style: normal;
         font-weight: normal;
@@ -75,5 +95,27 @@ export default {
         line-height: 58px;
 
         color: map-get($dark,"dark");
+    }
+
+     .navFiller{
+        position: absolute;
+        background-color: map-get($light,"light");
+
+        &.fillScreen{
+            animation-name: fillScreenCircle;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            animation-timing-function: ease-out;
+            animation-direction: forwards;
+        }
+        &.clearScreen{
+            animation-name: fillScreenCircle;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            animation-timing-function: ease-out;
+            animation-direction: backwards;
+        }
+
+        z-index: 2;
     }
 </style>
