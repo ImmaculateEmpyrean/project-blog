@@ -1,22 +1,19 @@
 <template>
     <nav id="NavBar">
         <router-link to="/" class="brandLogo">VN-Blog</router-link>
-        <NavSearchBar v-if="!isMobileWidth"/>
-        <NavSearchBarMobile v-if="isMobileWidth"/>
+        <ResponsiveNavSearchBar />       
     </nav>
 </template>
 
 <script>
-import NavSearchBar from './NavSearchBar.vue'; 
-import NavSearchBarMobile from './NavSearchBar-Mobile.vue';
+import ResponsiveNavSearchBar from './ResponsiveNavSearchBar.vue';
 
 import {minBreakpoints} from '@/javascript/breakpoints';
 
 export default {
     name: "NavBar",
     components:{
-        NavSearchBar,
-        NavSearchBarMobile
+        ResponsiveNavSearchBar
     },
     computed:{
         isMobileWidth(){
