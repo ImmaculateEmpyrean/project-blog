@@ -4,8 +4,6 @@
          v-show="showBrandLogo"
         ><img :src="require('../../assets/img/logo.svg')" alt="brand-logo"></router-link>
 
-        <div class="navFiller"></div>
-
         <NavSearchBar
          @navSearchBar:maximize_started="navSearchBarMaximize_started" @navSearchBar:maximize_completed="navSearchBarMaximize_completed"
          @navSearchBar:minimize_started="navSearchBarMinimize_started" @navSearchBar:minimize_completed="navSearchBarMinimize_completed"
@@ -119,27 +117,5 @@ export default {
         line-height: 58px;
 
         color: map-get($dark,"dark");
-    }
-
-     .navFiller{
-        position: absolute;
-        background-color: map-get($light,"light");
-
-        &.fillScreen{
-            animation-name: fillScreenCircle;
-            animation-duration: 1s;
-            animation-fill-mode: both;
-            animation-timing-function: ease-out;
-            animation-direction: forwards;
-        }
-        &.clearScreen{
-            animation-name: fillScreenCircle;
-            animation-duration: 1s;
-            animation-fill-mode: both;
-            animation-timing-function: ease-out;
-            animation-direction: reverse;
-        }
-
-        z-index: 2;
     }
 </style>
