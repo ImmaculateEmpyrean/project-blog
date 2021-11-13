@@ -1,7 +1,7 @@
 <template>
     <div class="home columns is-desktop">
           <div class="column is-9-desktop mainFeedColumn">
-              mainFeed
+              <MainFeedWidget />
           </div>
 
           <div class="column is-3-desktop sideFeedColumn">
@@ -11,15 +11,25 @@
 </template>
 
 <script>
+import MainFeedWidget from '../components/MainFeedWidget/Widget.vue';
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  components:{
+      MainFeedWidget
+  }
 }
 </script>
 
 <style lang="scss" scoped>
     @use '../assets/scss/setting' as *;
     @import '../assets/scss/columns.scss';
+
+    @include for-desktop-up{
+        .home{
+            gap: 24px;
+        }
+    }
 
     .mainFeedColumn{
         border: 1px solid steelblue;
