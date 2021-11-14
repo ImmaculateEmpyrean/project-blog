@@ -77,16 +77,10 @@ export default {
         },
         setMobileConfiguration(){
             this.showButtons = true;
-            let innerBox = this.$el;
-            innerBox.style.flex = "1 1 100%";
-
             this.isMobileConfiguration = true;
         },
         unsetMobileConfiguration(){
             this.showButtons = false;
-            let innerBox = this.$el;
-            innerBox.style.flex = "";
-
             this.isMobileConfiguration = false;
         }
     },
@@ -104,7 +98,12 @@ export default {
     @use '../../assets/scss/setting' as *;
 
     .InnerBox{
-        flex: 0 0 77.78%;
+        flex: 1 1 100%;
+
+        @include for-desktop-up{
+            flex: 0 0 77.78%;
+        }
+
         display: flex;
         flex-direction: column;
         margin: var(--spacing-large) 0;
