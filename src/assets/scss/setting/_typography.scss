@@ -4,7 +4,7 @@
 *{
     --font-normal: 16px;
     --font-large: 20px;
-    --font-larger: 40px;
+    --font-larger: 32px;
 }
 
 @include for-tablet-portrait-up{
@@ -43,7 +43,7 @@
 .subtitle{
     font-family: Merriweather;
     font-style: normal;
-    font-weight: 300;
+    font-weight: 400;
     font-size: var(--font-large);
     line-height: 25px;
     letter-spacing: 0.22em;

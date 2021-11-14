@@ -27,7 +27,8 @@ export default {
 
     @include for-desktop-up{
         .home{
-            gap: 24px;
+            margin-top: var(--spacing-large);
+            background-color: map-get($light,"light");
         }
     }
 
