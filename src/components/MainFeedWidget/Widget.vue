@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import {isMobile} from '../../javascript/breakpoints.js';
+
 import InnerBox from '@/components/MainFeedWidget/InnerBox.vue';
 
 export default {
@@ -36,13 +38,53 @@ export default {
             default: require('@/assets/img/noImage.png')
         }
     },
+    data(){
+        return{
+            inMobileConfiguration: false
+        }
+    },
     methods:{
         leftArrowClicked(){
             console.log('left arrow clicked on main-feed widget');
         },
         rightArrowClicked(){
             console.log('right arrow clicked on main-feed widget');
+        },
+
+        checkForMobileMode(){
+            if(isMobile()){
+                if(this.inMobileConfiguration === false)
+                    this.setMobileConfiguration();
+            } else {
+                if(this.inMobileConfiguration === true)
+                    this.unsetMobileConfiguration();
+            }
+        },
+        setMobileConfiguration(){
+            let leftArrow = this.$el.querySelector('#leftArrow');
+            let rightArrow = this.$el.querySelector('#rightArrow');
+
+            leftArrow.style.display = "none";
+            rightArrow.style.display = "none";
+
+            this.inMobileConfiguration = true;
+        },
+        unsetMobileConfiguration(){
+            let leftArrow = this.$el.querySelector('#leftArrow');
+            let rightArrow = this.$el.querySelector('#rightArrow');
+
+            leftArrow.style.display = "";
+            rightArrow.style.display = "";
+
+            this.inMobileConfiguration = false;
         }
+    },
+    mounted(){
+        this.checkForMobileMode();
+        window.addEventListener("resize",this.checkForMobileMode.bind(this));
+    },
+    unmounted(){
+        window.removeEventListener("resize",this.checkForMobileMode.bind(this));
     }
 }
 </script>
@@ -74,16 +116,6 @@ export default {
 
         @include for-tablet-portrait-up{
             justify-content: center;
-        }
-    }
-
-    svg{
-        width: 28px;
-        height: 48px;
-
-        @include for-tablet-portrait-up{
-            width: 48px;
-            height: 68px;  
         }
     }
 </style>
