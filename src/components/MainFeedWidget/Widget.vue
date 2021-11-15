@@ -1,6 +1,6 @@
 <template>
     <div class="MainFeedWidget">
-        
+
         <div class="leftArrow" id="leftArrow" @click="$emit('leftArrow:clicked')">
             <svg width="48" height="68" viewBox="0 0 78 98" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.01601 52.2585L75.8861 97.7792C76.0792 97.8991 76.3111 97.9736 76.5554 97.9942C76.7997 98.0147 77.0464 97.9805 77.2671 97.8955C77.4879 97.8104 77.6737 97.678 77.8034 97.5133C77.933 97.3487 78.0012 97.1585 78 96.9647V86.9711C78 86.3376 77.6231 85.73 77.0004 85.3421L18.0092 49.0005L77.0004 12.659C77.6395 12.2711 78 11.6635 78 11.03V1.03636C78 0.170166 76.7382 -0.308182 75.8861 0.221878L2.01601 45.7426C1.38816 46.129 0.880257 46.6233 0.530922 47.1878C0.18158 47.7523 0 48.3723 0 49.0005C0 49.6288 0.18158 50.2487 0.530922 50.8133C0.880257 51.3778 1.38816 51.8721 2.01601 52.2585Z" fill="#001021"/>
@@ -9,7 +9,7 @@
 
         <InnerBox :mainHeading="mainHeading" :imagePath="imagePath"
                   :postHeading="postHeading" :postText="postText" :postLink="postLink"
-                @leftArrow:clicked="$emit('leftArrow-clicked')" @rightArrow:clicked="$emit('rightArrow-clicked')"
+                @leftArrow:clicked="$emit('leftArrow:clicked')" @rightArrow:clicked="$emit('rightArrow:clicked')"
         />
         
         <div class="rightArrow" id="rightArrow" @click="$emit('rightArrow:clicked')">
