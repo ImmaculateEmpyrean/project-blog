@@ -1,17 +1,24 @@
 <template>
     <div class="home columns is-desktop">
           <div class="column is-9-desktop mainFeedColumn">
-            <transition v-on:enter="animateIn"  v-on:after-enter="cleanUpAfterIn" :duration="1500"
-                        v-on:leave="animateOut" v-on:after-leave="cleanUpAfterOut"     
-                        @leave-cancelled="leaveCancelled" @after-leave="afterLeave">
+            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                        @leave="animateOut" @after-leave="cleanUpAfterOut"     
+                        @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
                 <KoiChoco v-show="latestPostDisplayCounter===0"
                     @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
                 />
             </transition>
-            <transition v-on:enter="animateIn"  v-on:after-enter="cleanUpAfterIn" :duration="1500"
-                        v-on:leave="animateOut" v-on:after-leave="cleanUpAfterOut" 
-                        @leave-cancelled="leaveCancelled" @after-leave="afterLeave">
+            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                        @leave="animateOut" @after-leave="cleanUpAfterOut" 
+                        @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
                 <WhiteAlbum2 v-show="latestPostDisplayCounter===1"
+                    @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
+                />    
+            </transition>
+            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                        @leave="animateOut" @after-leave="cleanUpAfterOut" 
+                        @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
+                <Ef v-show="latestPostDisplayCounter===2"
                     @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
                 />    
             </transition>
@@ -28,18 +35,20 @@
 
 <script>
 import KoiChoco from '../components/MainFeedWidget/finishedWidgets/LatestPosts/KoiChoco.vue';
-import WhiteAlbum2 from '../components/MainFeedWidget/finishedWidgets/LatestPosts/WhiteAlbum2.vue'; 
+import WhiteAlbum2 from '../components/MainFeedWidget/finishedWidgets/LatestPosts/WhiteAlbum2.vue';
+import Ef from '../components/MainFeedWidget/finishedWidgets/LatestPosts/EfATaleOfTwo.vue'; 
 
 export default {
     name: 'Home',
     components:{
         KoiChoco,
-        WhiteAlbum2
+        WhiteAlbum2,
+        Ef
     },
     data(){
         return{
             latestPostDisplayCounter: 0,
-            latestPostDisplayCounterMax: 1,
+            latestPostDisplayCounterMax: 2,
             MostViewedPostDisplayCounter: 0
         }
     },
@@ -79,14 +88,26 @@ export default {
             animatables.forEach(function(el){
                 el.classList.remove("animate__fadeOut")
             });
-        },
 
-        leaveCanceled(){
-            this.latestPostDisplayCounter = Math.trunc(this.latestPostDisplayCounter)
+            this.afterLeave();
         },
         afterLeave(){
             this.latestPostDisplayCounter = Math.round(this.latestPostDisplayCounter)
-        }
+        },
+        
+
+        // I cant really figure out if this function must exist or what must it do
+        enterCancelled(el){
+            console.log(el);
+            console.log('enter transition cancelled, presumably for the above element');
+            this.cleanUpAfterIn(el);
+        },
+        leaveCancelled(el){
+            this.latestPostDisplayCounter = Math.trunc(this.latestPostDisplayCounter)
+
+            this.cleanUpAfterOut(el);
+            this.animateIn(el);
+        },
     }
 }
 </script>
