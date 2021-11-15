@@ -1,14 +1,16 @@
 <template>
     <div class="home columns is-desktop">
           <div class="column is-9-desktop mainFeedColumn">
-            <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut"      
-                        @after-leave="afterLeave">
+            <transition v-on:enter="animateIn"  v-on:after-enter="cleanUpAfterIn" :duration="1500"
+                        v-on:leave="animateOut" v-on:after-leave="cleanUpAfterOut"     
+                        @leave-cancelled="leaveCancelled" @after-leave="afterLeave">
                 <KoiChoco v-show="latestPostDisplayCounter===0"
                     @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
                 />
             </transition>
-            <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut" 
-                        @after-leave="afterLeave">
+            <transition v-on:enter="animateIn"  v-on:after-enter="cleanUpAfterIn" :duration="1500"
+                        v-on:leave="animateOut" v-on:after-leave="cleanUpAfterOut" 
+                        @leave-cancelled="leaveCancelled" @after-leave="afterLeave">
                 <WhiteAlbum2 v-show="latestPostDisplayCounter===1"
                     @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
                 />    
@@ -53,6 +55,35 @@ export default {
         }
       },
 
+      animateIn(el){
+        let animatables = el.querySelectorAll('.animate__animated');
+        animatables.forEach(function(element){
+            element.classList.add("animate__fadeIn")
+        });
+      },
+      cleanUpAfterIn(el){
+        let animatables = el.querySelectorAll('.animate__animated');
+        animatables.forEach(function(element){
+            element.classList.remove("animate__fadeIn")
+        });
+      },
+      
+      animateOut(el){
+        let animatables = el.querySelectorAll('.animate__animated');
+        animatables.forEach(function(el){
+            el.classList.add("animate__fadeOut")
+        });
+      },
+      cleanUpAfterOut(el){
+        let animatables = el.querySelectorAll('.animate__animated');
+        animatables.forEach(function(el){
+            el.classList.remove("animate__fadeOut")
+        });
+      },
+
+      leaveCanceled(){
+          this.latestPostDisplayCounter = Math.trunc(this.latestPostDisplayCounter)
+      },
       afterLeave(){
           this.latestPostDisplayCounter = Math.round(this.latestPostDisplayCounter)
       }

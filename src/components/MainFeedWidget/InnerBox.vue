@@ -1,9 +1,9 @@
 <template>
     <div class="InnerBox">
         <h1 class="heading1">{{mainHeading}}</h1>
-        <img :src="imagePath" :alt="`${postHeading} cover image`">
-        <h2 class="subtitle">{{postHeading}}</h2>
-        <p class="bodyText">{{postText}}</p>
+        <img :src="imagePath" :alt="`${postHeading} cover image`" class="animate__animated">
+        <h2 class="subtitle animate__animated">{{postHeading}}</h2>
+        <p class="bodyText animate__animated">{{postText}}</p>
         <div class="learnMoreBox">
 
             <div v-if="showButtons" class="leftArrow" id="leftArrowSmall" @click="$emit('leftArrow:clicked')">
@@ -12,7 +12,7 @@
                 </svg>
             </div>
 
-            <router-link class="bodyText" :to="postLink">Learn More</router-link>
+            <router-link class="bodyText animate__animated" :to="postLink">Learn More</router-link>
 
             <div v-if="showButtons" class="rightArrow" id="rightArrowSmall" @click="$emit('rightArrow:clicked')">
                 <svg width="28" height="48" viewBox="0 0 78 98" fill="none" xmlns="http://www.w3.org/2000/svg">
