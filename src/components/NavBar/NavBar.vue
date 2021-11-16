@@ -24,7 +24,8 @@ export default {
     },
     data(){
         return{
-            showBrandLogo: true
+            showBrandLogo: true,
+            minimized: false
         }
     },
     methods:{
@@ -62,10 +63,12 @@ export default {
     mounted(){
         onScroll(function(){
             let scrolledY = window.pageYOffset;
-            if(scrolledY > 175){
+            if(scrolledY > 0 && this.minimized === false){
                 this.$el.classList.add('minimize');
+                this.minimized = true;
             } else if(scrolledY === 0){
                 this.$el.classList.remove('minimize');
+                this.minimized = false;
             }
         }.bind(this))
 
