@@ -28,7 +28,7 @@
             />
           </div>
           <div class="column is-3-desktop sideFeedColumn">
-              sideFeed
+              <RecommendationsWidget />
           </div>
     </div>
 </template>
@@ -38,12 +38,16 @@ import KoiChoco from '../components/MainFeedWidget/finishedWidgets/LatestPosts/K
 import WhiteAlbum2 from '../components/MainFeedWidget/finishedWidgets/LatestPosts/WhiteAlbum2.vue';
 import Ef from '../components/MainFeedWidget/finishedWidgets/LatestPosts/EfATaleOfTwo.vue'; 
 
+import RecommendationsWidget from '../components/RecommendationsWidget/Widget.vue';
+
 export default {
     name: 'Home',
     components:{
         KoiChoco,
         WhiteAlbum2,
-        Ef
+        Ef,
+
+        RecommendationsWidget
     },
     data(){
         return{
@@ -121,6 +125,10 @@ export default {
             margin-top: var(--spacing-large);
             background-color: map-get($light,"light");
         }
+    }
+
+    .sideFeedColumn{
+        display: flex;
     }
 
     // .mainFeedColumn{

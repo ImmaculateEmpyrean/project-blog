@@ -38,6 +38,10 @@
     &.alternate-color{
         color: map-get($light,"light");
     }
+
+    &.smaller-size{
+        font-size: var(--font-large);
+    }
 }
 
 .subtitle{
@@ -53,6 +57,10 @@
 
     &.alternate-color{
         color: map-get($light,"light");
+    }
+
+    &.smaller-size{
+        font-size: var(--font-normal);
     }
 }
 
