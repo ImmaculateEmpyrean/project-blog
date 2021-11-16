@@ -15,6 +15,7 @@
 import NavSearchBar from './NavSearchBar.vue';
 
 import {isMobile} from '@/javascript/breakpoints';
+import {onScroll} from '@/javascript/scrollCore.js';
 
 export default {
     name: "NavBar",
@@ -59,14 +60,14 @@ export default {
 
     },
     mounted(){
-        window.addEventListener('scroll',function(){
+        onScroll(function(){
             let scrolledY = window.pageYOffset;
-            if(scrolledY > 100){
+            if(scrolledY > 175){
                 this.$el.classList.add('minimize');
-            } else if(scrolledY < 100){
+            } else if(scrolledY === 0){
                 this.$el.classList.remove('minimize');
             }
-        }.bind(this));
+        }.bind(this))
 
         //for bug fixing purpose as if window size changes without the input loosing focus.. then space-between is never set until refresh
         window.addEventListener('resize',function(){
