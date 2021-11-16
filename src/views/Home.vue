@@ -27,6 +27,8 @@
                 @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
             />
           </div>
+
+
           <div class="column is-3-desktop sideFeedColumn">
               <RecommendationsWidget />
           </div>
@@ -53,7 +55,12 @@ export default {
         return{
             latestPostDisplayCounter: 0,
             latestPostDisplayCounterMax: 2,
-            MostViewedPostDisplayCounter: 0
+
+            TrendingPostDisplayCounter: 0,
+            TrendingPostDisplayCounterMax:2,
+
+            EditorsPickPostDisplayCounter:0,
+            EditorsPickPostDisplayCounterMax:2
         }
     },
     methods:{

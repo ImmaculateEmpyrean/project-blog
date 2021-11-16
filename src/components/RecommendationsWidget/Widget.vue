@@ -1,6 +1,8 @@
 <template>
     <div class="RecommendationsWidget">
-        <h1 class="heading1 smaller-size">recommended</h1>
+        <h1 class="heading1 smaller-size recWidgetMainHeading">recommended</h1>
+        <InnerBox />
+        <InnerBox />
         <InnerBox />
         <InnerBox />
         <InnerBox />
@@ -40,11 +42,12 @@ export default {
         }
         
 
-        h1{
+        .recWidgetMainHeading{
             display: none;
             @include for-desktop-up{
                 display: block;
                 text-align: center;
+                margin-bottom: var(--spacing-normal);
             }
         }
     }
