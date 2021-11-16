@@ -36,7 +36,6 @@ export default {
         @include for-desktop-up{
             flex-direction: column;
             overflow-x: hidden;
-            gap: 0px;
 
             justify-content: space-between;
         }

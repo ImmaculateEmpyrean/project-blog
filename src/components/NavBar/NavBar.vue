@@ -83,7 +83,7 @@ export default {
     @use '../../assets/scss/setting' as *;
 
     nav{
-        transition: min-height 1s ease-in-out;
+        transition: min-height 0.3s ease-in-out;
         overflow-y: hidden;
 
         display: flex;

@@ -195,16 +195,4 @@ export default {
             background-color: map-get($light,"light");
         }
     }
-
-    .sideFeedColumn{
-        display: flex;
-    }
-
-    // .mainFeedColumn{
-    //     border: 1px solid steelblue;
-    // }
-
-    // .sideFeedColumn{
-    //     border: 1px solid coral;
-    // }
 </style>
