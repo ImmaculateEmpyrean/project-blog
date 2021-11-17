@@ -48,6 +48,7 @@ export default {
 footer{
     height: 125px;
     background-color: map-get($dark,"dark");
+    padding: 0 var(--spacing-normal);
 }
 
 .wrapper{
@@ -55,7 +56,7 @@ footer{
     flex-direction: column;
     justify-content: center;
 
-    @include for-desktop-up{
+    @include for-tablet-portrait-up{
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -92,8 +93,9 @@ footer{
     .inputBox{
         display: flex;
         height: 37px;
+
         input{
-            flex: 0 0 80%;
+            width: 80%;
             height: 100%;
 
             outline: none;
