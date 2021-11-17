@@ -78,6 +78,14 @@
     &.alternate-color{
         color: map-get($light,"light");
     }
+
+    &.accent-color{
+        color: $accent;
+    }
+
+    &.bold{
+        font-weight: 550;
+    }
 }
 
 @include for-tablet-portrait-up{

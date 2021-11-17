@@ -3,24 +3,23 @@
   <div class="constrainer">
       <router-view/>
   </div>
+  <Footer />
 </template>
 
 <script>
-import NavBar from './components/NavBar/NavBar.vue';
+import NavBar from '@/components/NavBar/NavBar.vue';
+import Footer from '@/components/Footer/Footer.vue';
 
 export default {
     name: "App",
     components:{
-        NavBar
+        NavBar,
+        Footer
     }
 }
 </script>
 
 <style lang="scss">
     @use './assets/scss/setting' as *;
-
-    .constrainer{
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+    @import './assets/scss/constrainer.scss';
 </style>
