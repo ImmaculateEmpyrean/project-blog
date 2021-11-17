@@ -1,23 +1,32 @@
 <template>
     <div class="RecommendationsWidget">
         <h1 class="heading1 smaller-size recWidgetMainHeading">recommended</h1>
-        <InnerBox />
-        <InnerBox />
-        <InnerBox />
-        <InnerBox />
-        <InnerBox />
-        <InnerBox />
-        <InnerBox />
+        <Cartagra />
+        <Clannad />
+        <Crescendo />
+        <Ef />
+        <KaraNoShojo2 />
+        <WhiteAlbum2 />
     </div>
 </template>
 
 <script>
-import InnerBox from './InnerBox.vue';
+import Cartagra from './finishedWidgets/Cartagra.vue'
+import Clannad from './finishedWidgets/Clannad.vue';
+import Crescendo from './finishedWidgets/Crescendo.vue';
+import Ef from './finishedWidgets/EfATaleOfTwo.vue';
+import KaraNoShojo2 from './finishedWidgets/KaraNoShojo2.vue';
+import WhiteAlbum2 from './finishedWidgets/WhiteAlbum2.vue';
 
 export default {
     name: "RecommendationsWidget",
     components:{
-        InnerBox
+        Cartagra,
+        Clannad,
+        Crescendo,
+        Ef,
+        KaraNoShojo2,
+        WhiteAlbum2
     }
 }
 </script>
