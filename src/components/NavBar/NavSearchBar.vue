@@ -70,6 +70,8 @@ export default {
             navSearchBar.classList.add('expand');
 
             this.removeMobileHidden();
+
+            this.$router.push('search')
         },
         searchFieldLostFocus(){
             let borderCover = this.$el.querySelector('.borderCover');
