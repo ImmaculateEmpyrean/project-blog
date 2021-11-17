@@ -1,16 +1,19 @@
 <template>
     <div class="searchPage">
+        <FilterButtonHolder />
         <Pagination />
     </div>
 </template>
 
 <script>
+import FilterButtonHolder from '@/components/FilterButtons/FilterButtonHolder.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {
     name: "Search",
     components:{
-        Pagination
+        Pagination,
+        FilterButtonHolder
     }
 }
 </script>
