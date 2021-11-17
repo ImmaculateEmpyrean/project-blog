@@ -46,9 +46,12 @@ export default {
 @import '../../assets/scss/constrainer.scss';
 
 footer{
-    height: 125px;
     background-color: map-get($dark,"dark");
     padding: 0 var(--spacing-normal);
+
+    @include for-tablet-portrait-up{
+        height: 125px;
+    }
 }
 
 .wrapper{
@@ -56,9 +59,14 @@ footer{
     flex-direction: column;
     justify-content: center;
 
+    gap: var(--spacing-large);
+
     @include for-tablet-portrait-up{
         flex-direction: row;
         justify-content: space-between;
+
+        gap: 0px;
+
         align-items: center;
 
         height: 100%;
@@ -69,6 +77,11 @@ footer{
     display: flex;
     flex-direction: column;
     gap: var(--spacing-small);
+
+    text-align: center;
+    @include for-tablet-portrait-up{
+        text-align: left;
+    }
 
     .icon-container{
         display: flex;
@@ -90,6 +103,11 @@ footer{
     }
 }
 .right{
+    text-align: center;
+    @include for-tablet-portrait-up{
+        text-align: left;
+    }
+
     .inputBox{
         display: flex;
         height: 37px;
