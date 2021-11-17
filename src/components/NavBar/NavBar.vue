@@ -92,6 +92,7 @@ export default {
 
         display: flex;
         position: sticky;
+        z-index: 1000;
         top: 0;
 
         justify-content: space-between;
