@@ -149,7 +149,14 @@ export default {
                 element.classList.add("animate__fadeIn")
             });
 
+            let section = null;
+            if(el.dataset.post === "latestPost")
+                section = this.$el.querySelector('.latestPosts');
+            else if(el.dataset.post === "editorsPick")
+                section = this.$el.querySelector('.editorsPick');
+            else console.log('the animateIn elements post data attribute cannot be determined');
 
+            section.style.maxHeight = `${el.offsetHeight}px`
         },
         cleanUpAfterIn(el){
             let animatables = el.querySelectorAll('.animate__animated');
