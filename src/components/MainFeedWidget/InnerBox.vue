@@ -87,6 +87,11 @@ export default {
     mounted(){
         this.checkForMobileMode();
         window.addEventListener("resize",this.checkForMobileMode.bind(this));
+
+        window.addEventListener("load",function(){
+            this.$emit('init')
+        }.bind(this))
+
     },
     unmounted(){
         window.removeEventListener("resize",this.checkForMobileMode.bind(this));

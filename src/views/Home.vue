@@ -2,55 +2,55 @@
     <div class="home columns is-desktop">
           <div class="column is-9-desktop mainFeedColumn">
 
-            <!-- start section latest post -->
-            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
-                        @leave="animateOut" @after-leave="cleanUpAfterOut"     
-                        @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
-                <KoiChoco v-show="latestPostDisplayCounter===0" data-counter="latestPostCounter"
-                    @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
-                />
-            </transition>
-            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
-                        @leave="animateOut" @after-leave="cleanUpAfterOut" 
-                        @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
-                <WhiteAlbum2 v-show="latestPostDisplayCounter===1" data-counter="latestPostCounter"
-                    @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
-                />    
-            </transition>
-            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
-                        @leave="animateOut" @after-leave="cleanUpAfterOut" 
-                        @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
-                <Ef v-show="latestPostDisplayCounter===2" data-counter="latestPostCounter"
-                    @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
-                />    
-            </transition>
-            <!-- ended section latest post -->
+            <section class="latestPosts">
+                <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                            @leave="animateOut" @after-leave="cleanUpAfterOut"     
+                            @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
+                    <KoiChoco   v-show="latestPostDisplayCounter===0" data-post="latestPost" @init="initLatestPosts" ref="latestPostInitialComponent"
 
-            <!-- start section Editors Pick -->
-            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
-                        @leave="animateOut" @after-leave="cleanUpAfterOut"     
-                        @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
-                <Phenomeno v-show="editorsPickPostDisplayCounter===0" data-counter="editorsPickCounter"
-                    @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
-                />
-            </transition>
-            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
-                        @leave="animateOut" @after-leave="cleanUpAfterOut" 
-                        @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
-                <Cartagra v-show="editorsPickPostDisplayCounter===1" data-counter="editorsPickCounter"
-                    @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
-                />    
-            </transition>
-            <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
-                        @leave="animateOut" @after-leave="cleanUpAfterOut" 
-                        @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
-                <Clannad v-show="editorsPickPostDisplayCounter===2" data-counter="editorsPickCounter"
-                    @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
-                />    
-            </transition>
-            <!-- ended section Editors Pick -->
+                                @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
+                    />
+                </transition>
+                <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                            @leave="animateOut" @after-leave="cleanUpAfterOut" 
+                            @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
+                    <WhiteAlbum2    v-show="latestPostDisplayCounter===1" data-post="latestPost"
+                                    @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
+                    />    
+                </transition>
+                <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                            @leave="animateOut" @after-leave="cleanUpAfterOut" 
+                            @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
+                    <Ef v-show="latestPostDisplayCounter===2" data-post="latestPost"
+                        @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
+                    />    
+                </transition>
+            </section>
+            
+            <section class="editorsPick">
+                <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                            @leave="animateOut" @after-leave="cleanUpAfterOut"     
+                            @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
+                    <Phenomeno  v-show="editorsPickPostDisplayCounter===0" data-post="editorsPick" @init="initEditorsPick" ref="editorsPickInitialComponent"
+                        @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
+                    />
+                </transition>
+                <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                            @leave="animateOut" @after-leave="cleanUpAfterOut" 
+                            @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
+                    <Cartagra v-show="editorsPickPostDisplayCounter===1" data-post="editorsPick"
+                        @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
+                    />    
+                </transition>
+                <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
+                            @leave="animateOut" @after-leave="cleanUpAfterOut" 
+                            @leave-cancelled="leaveCancelled" @enter-cancelled="enterCancelled">
+                    <Clannad v-show="editorsPickPostDisplayCounter===2" data-post="editorsPick"
+                        @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
+                    />    
+                </transition>
+            </section>
           </div>
-
 
           <div class="column is-3-desktop sideFeedColumn">
               <RecommendationsWidget />
@@ -80,7 +80,7 @@ export default {
         Cartagra,
         Phenomeno,
 
-        RecommendationsWidget
+        RecommendationsWidget,
     },
     data(){
         return{
@@ -92,6 +92,15 @@ export default {
         }
     },
     methods:{
+        initLatestPosts(){
+            let latestPostsSection = this.$el.querySelector('.latestPosts');
+            latestPostsSection.style.maxHeight = `${this.$refs.latestPostInitialComponent.$el.offsetHeight}px`;
+        },
+        initEditorsPick(){
+            let editorsPickSection = this.$el.querySelector('.editorsPick');
+            editorsPickSection.style.maxHeight = `${this.$refs.editorsPickInitialComponent.$el.offsetHeight}px`;
+        },
+
         leftArrowClickedMainFeed(obj){
             if(obj.counterName === 'latestPostCounter'){
                 if(this.latestPostDisplayCounter > 0)
@@ -139,6 +148,8 @@ export default {
             animatables.forEach(function(element){
                 element.classList.add("animate__fadeIn")
             });
+
+
         },
         cleanUpAfterIn(el){
             let animatables = el.querySelectorAll('.animate__animated');
@@ -159,12 +170,12 @@ export default {
                 el.classList.remove("animate__fadeOut")
             });
             
-            this.afterLeave({name:el.dataset.counter});
+            this.afterLeave({name:el.dataset.post});
         },
-        afterLeave(whichCounter){
-            if(whichCounter.name === 'latestPostCounter')
+        afterLeave(whichPost){
+            if(whichPost.name === 'latestPost')
                 this.latestPostDisplayCounter = Math.round(this.latestPostDisplayCounter)
-            else if(whichCounter.name === 'editorsPickCounter')
+            else if(whichPost.name === 'editorsPick')
                 this.editorsPickPostDisplayCounter = Math.round(this.editorsPickPostDisplayCounter)
         },
         
@@ -194,5 +205,12 @@ export default {
             margin-top: var(--spacing-large);
             background-color: map-get($light,"light");
         }
+    }
+
+    section{
+        transition: max-height 2s ease-in-out;
+        height: 10000px;
+        max-height: 0px;
+        overflow-y: hidden;
     }
 </style>

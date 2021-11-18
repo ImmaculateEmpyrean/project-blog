@@ -10,6 +10,7 @@
         <InnerBox :mainHeading="mainHeading" :imagePath="imagePath"
                   :postHeading="postHeading" :postText="postText" :postLink="postLink"
                 @leftArrow:clicked="$emit('leftArrow:clicked')" @rightArrow:clicked="$emit('rightArrow:clicked')"
+                @init="$emit('init')"
         />
         
         <div class="rightArrow" id="rightArrow" @click="$emit('rightArrow:clicked')">
