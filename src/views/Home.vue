@@ -311,7 +311,10 @@ export default {
         window.addEventListener("resize",this.checkForMobileMode);
 
         window.addEventListener("resize",this.initLatestPosts);
-        window.addEventListener("resize",this.initEditorsPick)
+        window.addEventListener("resize",this.initEditorsPick);
+
+        this.initLatestPosts();
+        this.initEditorsPick();
     },
     beforeUnmount(){
         window.removeEventListener("resize",this.checkForMobileMode);

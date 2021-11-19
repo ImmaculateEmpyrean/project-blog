@@ -5,18 +5,18 @@
         <router-view></router-view>
       </transition>
   </div>
-  <Footer />
+  <FooterComponent />
 </template>
 
 <script>
 import NavBar from '@/components/NavBar/NavBar.vue';
-import Footer from '@/components/Footer/Footer.vue';
+import FooterComponent from '@/components/Footer/FooterComponent.vue';
 
 export default {
     name: "App",
     components:{
         NavBar,
-        Footer
+        FooterComponent
     }
 }
 </script>
