@@ -309,9 +309,15 @@ export default {
     mounted(){
         this.checkForMobileMode();
         window.addEventListener("resize",this.checkForMobileMode);
+
+        window.addEventListener("resize",this.initLatestPosts);
+        window.addEventListener("resize",this.initEditorsPick)
     },
     beforeUnmount(){
         window.removeEventListener("resize",this.checkForMobileMode);
+
+        window.removeEventListener("resize",this.initLatestPosts);
+        window.removeEventListener("resize",this.initEditorsPick);
     }
 }
 </script>
