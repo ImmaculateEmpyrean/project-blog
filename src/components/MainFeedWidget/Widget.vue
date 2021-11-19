@@ -54,7 +54,7 @@ export default {
     data(){
         return{
             showButtons: false,
-            isMobileConfiguration: false
+            inMobileConfiguration: false
         }
     },
     methods:{
@@ -76,11 +76,11 @@ export default {
         },
         setMobileConfiguration(){
             this.showButtons = true;
-            this.isMobileConfiguration = true;
+            this.inMobileConfiguration = true;
         },
         unsetMobileConfiguration(){
             this.showButtons = false;
-            this.isMobileConfiguration = false;
+            this.inMobileConfiguration = false;
         }
     },
     mounted(){
