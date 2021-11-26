@@ -6,7 +6,13 @@
             <PublisherTagsButton />
             <SortByButton />
         </div>
-        <Pagination :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
+        <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
+
+        <div class="searchCardArea">
+            <div class="box"></div>
+        </div>
+
+        <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
     </div>
 </template>
 
@@ -47,6 +53,16 @@ export default {
     @use '../assets/scss/setting' as *;
     @import '../assets/scss/columns.scss';
     
+    .box{
+        border: 1px solid black;
+        padding: 50px;
+        margin: 50px;
+
+        width: 20%;
+
+        background-color: crimson;
+    }
+
     .searchPage{
         height: 100vh; //for testing purpose only
     }
