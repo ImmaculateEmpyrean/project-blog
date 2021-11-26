@@ -1,24 +1,43 @@
 <template>
     <div class="searchPage">
-        <n-pagination :page-count="pageCount">
-            <template #prev>Go To Next Page</template>
-            <template #next>Go To Previous Page</template>
-        </n-pagination>
+        <div class="buttonRack">
+            <SelectTagsButton />
+            <BlackListButton />
+            <PublisherTagsButton />
+            <SortByButton />
+        </div>
+        <Pagination :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
     </div>
 </template>
 
 <script>
-import {NPagination} from 'naive-ui';
+import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
+import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
+import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
+import SortByButton from '@/components/SearchPage/SortByButton.vue';
+
+import Pagination from '@/components/Pagination.vue';
+
 
 export default {
     name: "Search",
     components:{
-        NPagination,
+        Pagination,
+        SelectTagsButton,
+        BlackListButton,
+        PublisherTagsButton,
+        SortByButton
     },
     data(){
         return{
             pageCount: 2,
-            
+            currentPage: 1
+        }
+    },
+    methods:{
+        searchPageUpdated(page){
+            this.currentPage = page;
+            console.log(`new page : ${page}`)
         }
     }
 }
@@ -36,13 +55,6 @@ export default {
         .searchPage{
             margin-top: var(--spacing-large);
             background-color: map-get($light,"light");
-        }
-    }
-
-    .n-pagination-item{
-        background-color: red;
-        &:hover{
-            background-color: red;
         }
     }
 </style>
