@@ -10,3 +10,15 @@ export function isMobile(){
         return false;
     else return true;
 }
+
+export function isTablet(){
+    if(parseInt(window.innerWidth) >= minBreakpoints.forTabletPortraitUp && parseInt(window.innerWidth) < minBreakpoints.forDesktopUp)
+        return true;
+    else return false;
+}
+
+export function isDesktop(){
+    if(parseInt(window.innerWidth) >= minBreakpoints.forDesktopUp)
+        return true;
+    else return false;
+}

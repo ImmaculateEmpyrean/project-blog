@@ -15,7 +15,7 @@ import NavBar from '@/components/NavBar/NavBar.vue';
 import FooterComponent from '@/components/Footer/FooterComponent.vue';
 
 import { NConfigProvider } from 'naive-ui';
-import {blogTheme} from '@/javascript/blogTheme/blogTheme.js'
+import {getBlogTheme} from '@/javascript/blogTheme/blogTheme.js'
 
 export default {
     name: "App",
@@ -26,8 +26,21 @@ export default {
     },
     data(){
         return{
-            blogTheme
+            blogTheme: null
         }
+    },
+    methods: {
+        setBlogTheme(){
+            this.blogTheme = getBlogTheme();
+            console.log('set blog theme')
+        }
+    },
+    mounted(){
+        this.setBlogTheme();
+        window.addEventListener("resize",this.setBlogTheme.bind(this));
+    },
+    unmounted(){
+        window.removeEventListener("resize",this.setBlogTheme.bind(this));
     }
 }
 </script>
