@@ -9,7 +9,14 @@
         <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
         <div class="searchCardArea">
-            <div class="box"></div>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
+            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>            
         </div>
 
         <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -23,6 +30,7 @@ import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue
 import SortByButton from '@/components/SearchPage/SortByButton.vue';
 
 import Pagination from '@/components/Pagination.vue';
+import SearchCard from '@/components/SearchCard.vue';
 
 
 export default {
@@ -32,7 +40,9 @@ export default {
         SelectTagsButton,
         BlackListButton,
         PublisherTagsButton,
-        SortByButton
+        SortByButton,
+
+        SearchCard
     },
     data(){
         return{
@@ -53,18 +63,11 @@ export default {
     @use '../assets/scss/setting' as *;
     @import '../assets/scss/columns.scss';
     
-    .box{
+    .card{
         border: 1px solid black;
-        padding: 50px;
         margin: 50px;
 
         width: 20%;
-
-        background-color: crimson;
-    }
-
-    .searchPage{
-        height: 100vh; //for testing purpose only
     }
 
     @include for-desktop-up{
@@ -72,5 +75,26 @@ export default {
             margin-top: var(--spacing-large);
             background-color: map-get($light,"light");
         }
+    }
+
+    .buttonRack{
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-normal) var(--spacing-large);
+
+        .n-button{
+            flex: 1 1 100%;
+        }
+    }
+    
+    .searchCardArea{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        row-gap: var(--spacing-large);
+        column-gap: var(--spacing-large);
+
+        margin: var(--spacing-large) 0;
     }
 </style>
