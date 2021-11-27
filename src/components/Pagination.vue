@@ -19,7 +19,7 @@
                     Next Page
                 </n-button>
             </template>
-            
+
         </n-pagination>
     </div>
 </template>
@@ -51,6 +51,6 @@ export default {
         display: flex;
         justify-content: center;
 
-        margin: calc(var(--spacing-large) * 2);
+        padding: calc(var(--spacing-large) * 2);
     }
 </style>

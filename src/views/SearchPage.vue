@@ -1,6 +1,6 @@
 <template>
     <div class="searchPage">
-        <div class="buttonRack">
+        <div class="buttonRack bodyText">
             <SelectTagsButton />
             <BlackListButton />
             <PublisherTagsButton />

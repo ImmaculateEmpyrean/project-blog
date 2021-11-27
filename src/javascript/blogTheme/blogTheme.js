@@ -26,6 +26,11 @@ export function getBlogTheme(){
     return {
         common: {
             primaryColor: commonVariables.color.accentColor,
+            primaryColorHover: commonVariables.color.accentColor,
+        },
+        Button: {
+            color: commonVariables.color.accentColor,
+            textColor: '#FFF'
         },
         Pagination:{
             itemSize: style.spacing.large,
