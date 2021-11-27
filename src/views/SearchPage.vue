@@ -90,7 +90,7 @@ export default {
     .searchCardArea{
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-around;
 
         row-gap: var(--spacing-large);
         column-gap: var(--spacing-large);

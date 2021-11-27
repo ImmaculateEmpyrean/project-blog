@@ -33,10 +33,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .n-card{
-        flex: 1 1 33%;
-        max-width: 256px;
+    @use '../assets/scss/setting' as *;
 
-        cursor: pointer;
+    .n-card {
+        flex: 1 1 33%;
+        max-width: 115px;
+
+        @include for-tablet-portrait-up{
+            max-width: 200px;
+        }
+
+        @include for-desktop-up {
+            max-width: 256px;
+            cursor: pointer;
+        }
     }
 </style>
