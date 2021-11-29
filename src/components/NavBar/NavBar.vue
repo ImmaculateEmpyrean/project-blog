@@ -7,6 +7,8 @@
         <NavSearchBar
          @navSearchBar:maximize_started="navSearchBarMaximize_started" @navSearchBar:maximize_completed="navSearchBarMaximize_completed"
          @navSearchBar:minimize_started="navSearchBarMinimize_started" @navSearchBar:minimize_completed="navSearchBarMinimize_completed"
+
+         @searchBar:update="searchBarUpdated"
         />       
     </nav>
 </template>
@@ -57,6 +59,10 @@ export default {
                 this.showBrandLogo = false;
                 console.log('maximize completed')
             }
+        },
+
+        searchBarUpdated(payload){
+            this.$emit('searchBar:update',payload);
         }
 
     },

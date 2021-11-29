@@ -6,7 +6,7 @@
             <span class="iconify icon" data-icon="bx:bx-search-alt-2"></span>
         </div>
         <input type="text" id="NavSearchBar" class="subtitle mobile-hidden" placeholder="Visual-Novel"
-               @focus="searchFieldFocused" @blur="searchFieldLostFocus"
+               @focus="searchFieldFocused" @blur="searchFieldLostFocus" v-model="inputText"
         >
         <div class="border mobile-hidden"></div>
         <div class="borderCover mobile-hidden"></div>
@@ -19,6 +19,12 @@ export default {
     data(){
         return{
             mobileHiddenRemoved: false,
+            inputText: ''
+        }
+    },
+    watch:{
+        inputText(newValue){
+            this.$emit('searchBar:update',newValue);
         }
     },
     methods:{

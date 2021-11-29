@@ -1,6 +1,6 @@
 <template>
     <n-config-provider :theme-overrides="blogTheme">
-        <NavBar/>
+        <NavBar @searchBar:update="searchBarUpdated"/>
         <div class="constrainer">
             <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
                 <router-view></router-view>
@@ -26,13 +26,20 @@ export default {
     },
     data(){
         return{
-            blogTheme: null
+            blogTheme: null,
+            reactiveSearchBarValue:{
+                searchBarValue: ''
+            }
         }
     },
     methods: {
         setBlogTheme(){
             this.blogTheme = getBlogTheme();
             console.log('set blog theme')
+        },
+
+        searchBarUpdated(payload){
+            this.reactiveSearchBarValue.searchBarValue = payload;
         }
     },
     mounted(){
@@ -41,6 +48,11 @@ export default {
     },
     unmounted(){
         window.removeEventListener("resize",this.setBlogTheme.bind(this));
+    },
+    provide(){
+        return{
+            searchBarValue: this.reactiveSearchBarValue
+        }
     }
 }
 </script>

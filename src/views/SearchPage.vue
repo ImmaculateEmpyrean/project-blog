@@ -55,6 +55,18 @@ export default {
             this.currentPage = page;
             console.log(`new page : ${page}`)
         }
+    },
+    watch:{
+        searchBarValue: {
+            handler(newValue){
+                console.log(`new value updated : ${newValue.searchBarValue} `);
+            },
+            deep: true,
+        }
+    },
+    inject:["searchBarValue"],
+    mounted(){
+        console.log(this.searchBarValue);
     }
 }
 </script>
