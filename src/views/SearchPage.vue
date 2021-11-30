@@ -6,24 +6,28 @@
             <PublisherTagsButton />
             <SortByButton />
         </div>
-        <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
-        <div class="searchCardArea">
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="koiToSenkyoToChocolate">
-                <template #tagBox>
-                    <Tag :tagName="Romance" />
-                </template>
-            </SearchCard>
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="whiteAlbum2"/>
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="efATaleOfTwo"/>
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="phenomeno"/>
-            <!-- <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="cartagra"/>
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="clannad"/>
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="crescendo"/>
-            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="karaNoShojoEpisode2"/> -->
+        <div class="searchShowArea">
+            <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
+
+            <div class="searchCardArea">
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="koiToSenkyoToChocolate">
+                    <template #tagBox>
+                        <Tag :tagName="Romance" />
+                    </template>
+                </SearchCard>
+                <!-- <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="whiteAlbum2"/>
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="efATaleOfTwo"/>
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="phenomeno"/> -->
+                <!-- <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="cartagra"/>
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="clannad"/>
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="crescendo"/>
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="karaNoShojoEpisode2"/> -->
+            </div>
+
+            <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
         </div>
 
-        <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
     </div>
 </template>
 
@@ -87,6 +91,21 @@ export default {
     @use '../assets/scss/setting' as *;
     @import '../assets/scss/columns.scss';
     
+    .searchPage{
+        min-height: 85vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .searchShowArea{
+            flex: 1 1 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+
     .card{
         border: 1px solid black;
         margin: 50px;

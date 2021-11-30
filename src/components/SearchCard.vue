@@ -11,7 +11,7 @@
             </div>
         </template>
         
-        <p class="bodyText">
+        <p class="bodyText" v-show="!isMobileConfiguration()">
             {{cardContent}}
         </p>
     </n-card>
@@ -19,6 +19,7 @@
 
 <script>
 import {NCard} from 'naive-ui';
+import {isMobile} from '../javascript/breakpoints.js'
 
 export default {
     name: "SearchCard",
@@ -38,6 +39,11 @@ export default {
             type:String,
             default: "There Is No Content In This Card To Bother About"
         },
+    },
+    methods: {
+        isMobileConfiguration(){
+            return isMobile();
+        }
     }
 }
 </script>
