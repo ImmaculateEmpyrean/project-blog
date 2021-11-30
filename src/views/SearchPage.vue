@@ -9,14 +9,18 @@
         <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
         <div class="searchCardArea">
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>
-            <SearchCard :imageLink="require('@/assets/img/utawarerumonoMaskOfTruth.jpg')"/>            
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="koiToSenkyoToChocolate">
+                <template #tagBox>
+                    <Tag :tagName="Romance" />
+                </template>
+            </SearchCard>
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="whiteAlbum2"/>
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="efATaleOfTwo"/>
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="phenomeno"/>
+            <!-- <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="cartagra"/>
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="clannad"/>
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="crescendo"/>
+            <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="karaNoShojoEpisode2"/> -->
         </div>
 
         <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -28,10 +32,10 @@ import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
 import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
 import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
 import SortByButton from '@/components/SearchPage/SortByButton.vue';
+import Tag from '../components/SearchPage/Tag.vue';
 
 import Pagination from '@/components/Pagination.vue';
 import SearchCard from '@/components/SearchCard.vue';
-
 
 export default {
     name: "Search",
@@ -42,7 +46,8 @@ export default {
         PublisherTagsButton,
         SortByButton,
 
-        SearchCard
+        SearchCard,
+        Tag
     },
     data(){
         return{
@@ -67,6 +72,13 @@ export default {
     inject:["searchBarValue"],
     mounted(){
         console.log(this.searchBarValue);
+        let value = Object.values(this.$refs)
+        
+        value.forEach(function(val){
+            console.log(val.$el.parentElement)
+        })
+
+        console.log(value)
     }
 }
 </script>
@@ -107,6 +119,6 @@ export default {
         row-gap: var(--spacing-large);
         column-gap: var(--spacing-large);
 
-        margin: var(--spacing-large) 0;
+        margin: var(--spacing-large) ;
     }
 </style>

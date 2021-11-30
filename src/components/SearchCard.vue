@@ -1,9 +1,19 @@
 <template>
     <n-card hoverable title="Card with Cover">
         <template #cover>
-        <img :src="imageLink" />
+            <img :src="imageLink" />
         </template>
-        Card Content
+        
+        <template #header>
+            <h1 class="subtitle smaller-size">{{cardTitle}}</h1>
+            <div class="tagWrapper">
+                <slot name="tagBox"></slot>
+            </div>
+        </template>
+        
+        <p class="bodyText">
+            {{cardContent}}
+        </p>
     </n-card>
 </template>
 
@@ -36,16 +46,15 @@ export default {
     @use '../assets/scss/setting' as *;
 
     .n-card {
-        flex: 1 1 33%;
-        max-width: 115px;
+        flex: 1 1 40%;
+        text-align: center;
+        cursor: pointer;
+    }
 
-        @include for-tablet-portrait-up{
-            max-width: 200px;
-        }
-
-        @include for-desktop-up {
-            max-width: 256px;
-            cursor: pointer;
-        }
+    .tagWrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: var(--spacing-normal);
     }
 </style>
