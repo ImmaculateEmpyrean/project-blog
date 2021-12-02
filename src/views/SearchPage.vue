@@ -10,19 +10,22 @@
         <div class="searchShowArea">
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
-            <div class="searchCardArea">
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="koiToSenkyoToChocolate">
+            <div class="searchCardArea" id="searchCardArea">
+
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="koiToSenkyoToChocolate" >
                     <template #tagBox>
                         <Tag :tagName="Romance" />
                     </template>
                 </SearchCard>
-                <!-- <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="whiteAlbum2"/>
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="efATaleOfTwo"/>
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="phenomeno"/> -->
-                <!-- <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="cartagra"/>
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="clannad"/>
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="crescendo"/>
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="karaNoShojoEpisode2"/> -->
+
+                <SearchCard :imageLink="require('@/assets/img/whiteAlbum2.jpg')" ref="whiteAlbum2"/>
+                <SearchCard :imageLink="require('@/assets/img/EfATaleOfTwo.jpg')" ref="efATaleOfTwo"/>
+                <SearchCard :imageLink="require('@/assets/img/phenomeno.jpg')" ref="phenomeno"/>
+                <SearchCard :imageLink="require('@/assets/img/cartagra.jpg')" ref="cartagra"/>
+                <SearchCard :imageLink="require('@/assets/img/clannad.png')" ref="clannad"/>
+                <SearchCard :imageLink="require('@/assets/img/crescendo.png')" ref="crescendo"/>
+                <SearchCard :imageLink="require('@/assets/img/karaNoShojo2.jpg')" ref="karaNoShojoEpisode2"/>
+
             </div>
 
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -56,7 +59,9 @@ export default {
     data(){
         return{
             pageCount: 2,
-            currentPage: 1
+            currentPage: 1,
+            
+            searchAreaElements: null
         }
     },
     methods:{
@@ -75,14 +80,19 @@ export default {
     },
     inject:["searchBarValue"],
     mounted(){
-        console.log(this.searchBarValue);
-        let value = Object.values(this.$refs)
+        // console.log(this.searchBarValue);
+        // let value = Object.values(this.$refs)
         
-        value.forEach(function(val){
-            console.log(val.$el.parentElement)
-        })
+        // this.searchAreaElements = value.map(function(val){
+        //     if(val.$el.parentElement === this.$el.querySelector('.searchCardArea'))
+        //         return val.$el;
+        // }.bind(this));
 
-        console.log(value)
+        // console.log('printing search Area Elements');
+        // console.log(this.searchAreaElements);
+
+        //this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
+        console.log(this.searchAreaElements);
     }
 }
 </script>
