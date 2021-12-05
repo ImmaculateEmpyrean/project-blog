@@ -58,6 +58,7 @@ export default {
         return{
             pageCount: 2,
             currentPage: 1,
+            noResultsFound: false,
             
             searchAreaElements: null,
             fuzzySearchList: []
@@ -79,9 +80,36 @@ export default {
     watch:{
         searchBarValue: {
             handler(valueElement){
+                if(valueElement.searchBarValue === ''){
+                    list = this.fuzzySearchList.values();
+                    console.log(list);
+                    return;
+                }
+
                 //the 0.05 is the minimum similarity required for a match.. I dunno the exact maths but 0.01 seems to work?.
-                let list = this.fuzzySearchList.get(valueElement.searchBarValue,'test',0.01); 
-                console.log(list);
+                let list = this.fuzzySearchList.get(valueElement.searchBarValue,[],0.01);
+                list = list.map(function(element){
+                    return element[1]
+                })
+                
+                if(list.length === 0){
+                    this.currentPage = 0;
+                    this.pageCount = 0;
+
+                    this.noResultsFound = true;
+
+                    console.log('no results found')
+                }
+                else{
+                    this.currentPage = 1;
+                    this.pageCount = parseInt(list.length / 4);
+                    if(list.length % 4 > 0)
+                        this.pageCount = this.pageCount + 1;
+                    
+                    this.noResultsFound = false;
+
+                    console.log(list);
+                }
             },
             deep: true,
             immediate: false
@@ -89,11 +117,11 @@ export default {
     },
     inject:["searchBarValue"],
     mounted(){
-        //get the search area elements from the browser dom
-        this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
-
         //create the search list from the manifest in posession
         this.createSearchListFromManifest();
+
+        //get the search area elements from the browser dom
+        this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
     }
 }
 </script>
