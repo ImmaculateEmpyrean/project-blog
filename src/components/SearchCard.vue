@@ -48,7 +48,7 @@ export default {
     },
     data(){
         return {
-            show: false,
+            show: true,
             cardOrderNumber: -1
         }
     },
@@ -77,6 +77,9 @@ export default {
         flex: 1 1 40%;
         text-align: center;
         cursor: pointer;
+
+        background-color: map-get($light, "light");
+        margin: var(--spacing-normal);
     }
 
     .tagWrapper{

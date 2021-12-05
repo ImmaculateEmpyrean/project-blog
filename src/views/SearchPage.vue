@@ -21,10 +21,10 @@
                 <SearchCard :imageLink="require('@/assets/img/whiteAlbum2.jpg')" ref="whiteAlbum2"/>
                 <SearchCard :imageLink="require('@/assets/img/EfATaleOfTwo.jpg')" ref="efATaleOfTwo"/>
                 <SearchCard :imageLink="require('@/assets/img/phenomeno.jpg')" ref="phenomeno"/>
-                <SearchCard :imageLink="require('@/assets/img/cartagra.jpg')" ref="cartagra"/>
+                <!-- <SearchCard :imageLink="require('@/assets/img/cartagra.jpg')" ref="cartagra"/>
                 <SearchCard :imageLink="require('@/assets/img/clannad.png')" ref="clannad"/>
                 <SearchCard :imageLink="require('@/assets/img/crescendo.png')" ref="crescendo"/>
-                <SearchCard :imageLink="require('@/assets/img/karaNoShojo2.jpg')" ref="karaNoShojoEpisode2"/>
+                <SearchCard :imageLink="require('@/assets/img/karaNoShojo2.jpg')" ref="karaNoShojoEpisode2"/> -->
 
             </div>
 
@@ -149,5 +149,7 @@ export default {
         column-gap: var(--spacing-large);
 
         margin: var(--spacing-large) ;
+
+        background-color: white;
     }
 </style>

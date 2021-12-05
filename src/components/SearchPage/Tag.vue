@@ -1,5 +1,5 @@
 <template>
-    <n-tag  size="large" round :color="colorObject">
+    <n-tag round :color="colorObject">
       {{tagName}}
     </n-tag>
 </template>
@@ -30,3 +30,13 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    @use '../../assets/scss/setting' as *;
+
+    .n-tag{
+        font-size: var(--font-small);
+        padding: var(--spacing-normal);
+    }
+
+</style>
