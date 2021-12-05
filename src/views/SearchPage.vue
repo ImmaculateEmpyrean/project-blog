@@ -70,11 +70,8 @@ export default {
             console.log(`new page : ${page}`)
         },
         createSearchListFromManifest(){
-            let list = [];
-            searchList.forEach(function(element){
-                list.push(element.name);
-            }.bind(this));
-            this.fuzzySearchList = FuzzySet(list);
+            let list = Object.keys(searchList);
+            this.fuzzySearchList = FuzzySet(list); //create a fuzzy list from the array of names I have.
         }
     },
     watch:{

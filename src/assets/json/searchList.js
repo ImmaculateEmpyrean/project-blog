@@ -1,5 +1,7 @@
-export let searchList = [
-    {
+//It is imperative that the key to a object is the same as the name field of the object.. the code is written expecting that this is the case.. and I dont really plan on writing substantial debugging code 
+
+export let searchList = {
+    "Koi to Senkyo to Chocolate": {
         name:"Koi to Senkyo to Chocolate",
         aliases:["Koichoco","Love, Election & Chocolate","Love Election and Chocolate","Love, Elections & Chocolate"],
         postLink: "/koiChoco",
@@ -14,7 +16,7 @@ export let searchList = [
             "Central Heroine"
         ]
     },
-    {
+    "White Album 2 ~Introductory Chapter~": {
         name:"White Album 2 ~Introductory Chapter~",
         aliases:["WHITE ALBUM2 -i.c.-","WA2ic"],
         postLink: "/whiteAlbum2Intro",
@@ -27,7 +29,7 @@ export let searchList = [
             "Male Protagonist"
         ]
     },
-    {
+    "White Album 2 ~Closing Chapter~": {
         name:"White Album 2 ~Closing Chapter~",
         aliases:["WHITE ALBUM2 -c.c.-","WA2cc"],
         postLink: "/whiteAlbum2ClosingChapter",
@@ -42,7 +44,7 @@ export let searchList = [
             "Male Protagonist"
         ]
     },
-    {
+    "ef - a fairy tale of two": {
         name: "ef - a fairy tale of two",
         aliases: ["ever forever", "eternal feather", "emotional flutter", "two", "only two", "two stories", "the fairy tale is not just one", "but are only two."],
         postLink: "/ef",
@@ -54,7 +56,7 @@ export let searchList = [
             "Mystery"
         ]
     },
-    {
+    "Phenomeno - Mitsurugi Yoishi wa Kowagaranai": {
         name: "Phenomeno - Mitsurugi Yoishi wa Kowagaranai",
         aliases: [],
         postLink: "/phenomeno",
@@ -67,7 +69,7 @@ export let searchList = [
             "Mystery"
         ]
     },
-    {
+    "Cartagra ~Tsuki Kurui no Yamai~": {
         name: "Cartagra ~Tsuki Kurui no Yamai~",
         aliases: ["Karutagura ~Tsuki-gurui no Yamai~"],
         postLink: "/cartagra",
@@ -80,7 +82,7 @@ export let searchList = [
             "Horror"    
         ]
     },
-    {
+    "Clannad": {
         name: "Clannad",
         aliases: [""],
         postLink: "/clannad",
@@ -93,7 +95,7 @@ export let searchList = [
             "Comedy"
         ]
     },
-    {
+    "Crescendo ~Eien da to Omotte Ita Ano Koro~": {
         name: "Crescendo ~Eien da to Omotte Ita Ano Koro~",
         aliases: ["Crescendo ~Eien Datta Ano Koro~"],
         postLink: "/crescendo",
@@ -105,7 +107,7 @@ export let searchList = [
             "Male Protaganist"
         ]
     },
-    {
+    "Kara no Shoujo - The Second Episode": {
         name: "Kara no Shoujo - The Second Episode",
         aliases: ["Kara no Shoujo 2","Uro no Shoujo", "KnS2"],
         postLink: "/kns2",
@@ -117,4 +119,4 @@ export let searchList = [
             "Male Protagonist"
         ]
     }
-];
+}
