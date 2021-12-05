@@ -4,7 +4,7 @@ export let searchList = [
         aliases:["Koichoco","Love, Election & Chocolate","Love Election and Chocolate","Love, Elections & Chocolate"],
         postLink: "/koiChoco",
         developer: ['sprite','Vridge Inc.'],
-        img: "@/assets/img/koiChoco.jpg",
+        img: require("@/assets/img/koiChoco.jpg"),
         tags:[
             "Romance",
             "Friendship",
@@ -19,7 +19,7 @@ export let searchList = [
         aliases:["WHITE ALBUM2 -i.c.-","WA2ic"],
         postLink: "/whiteAlbum2Intro",
         developer: ["Leaf","Sting"],
-        img: "whiteAlbum2.jpg",
+        img: require("@/assets/img/whiteAlbum2.jpg"),
         tags:[
             "Romance",
             "Dramatic Love Triangle",
@@ -32,7 +32,7 @@ export let searchList = [
         aliases:["WHITE ALBUM2 -c.c.-","WA2cc"],
         postLink: "/whiteAlbum2ClosingChapter",
         developer: ["Leaf","Sting"],
-        img: "whiteAlbum2ClosingChapter.jpg",
+        img: require("@/assets/img/whiteAlbum2ClosingChapter.jpg"),
         tags:[
             "Romance",
             "Journalist Protagonist",
@@ -47,7 +47,7 @@ export let searchList = [
         aliases: ["ever forever", "eternal feather", "emotional flutter", "two", "only two", "two stories", "the fairy tale is not just one", "but are only two."],
         postLink: "/ef",
         developer: ["Minori"],
-        img: "EfATaleOfTwo.jpg",
+        img: require("@/assets/img/EfATaleOfTwo.jpg"),
         tags:[
             "Romance",
             "Multiple Protagonists",
@@ -59,7 +59,7 @@ export let searchList = [
         aliases: [],
         postLink: "/phenomeno",
         developer: ["Nitro Plus"],
-        img: "phenomeno.jpg",
+        img: require("@/assets/img/phenomeno.jpg"),
         tags:[
             "Horror",
             "Kinetic Novel",
@@ -72,7 +72,7 @@ export let searchList = [
         aliases: ["Karutagura ~Tsuki-gurui no Yamai~"],
         postLink: "/cartagra",
         developer: ["Innocent Grey"],
-        img: "cartagra.jpg",
+        img: require("@/assets/img/cartagra.jpg"),
         tags:[
             "Detective Work",
             "Multiple Endings",
@@ -85,7 +85,7 @@ export let searchList = [
         aliases: [""],
         postLink: "/clannad",
         developer: ["Key"],
-        img: "clannad.jpg",
+        img: require("@/assets/img/clannad.png"),
         tags:[
             "Romance",
             "Family",
@@ -98,7 +98,7 @@ export let searchList = [
         aliases: ["Crescendo ~Eien Datta Ano Koro~"],
         postLink: "/crescendo",
         developer: ["D.O"],
-        img: "crescendo.jpg",
+        img: require("@/assets/img/crescendo.png"),
         tags:[
             "Romance",
             "High School",
@@ -110,11 +110,11 @@ export let searchList = [
         aliases: ["Kara no Shoujo 2","Uro no Shoujo", "KnS2"],
         postLink: "/kns2",
         developer: ["Innocent Grey"],
-        img: "karaNoShojo2.jpg",
+        img: require("@/assets/img/karaNoShojo2.jpg"),
         tags:[
             "Mystery",
             "Detective Work",
             "Male Protagonist"
         ]
     }
-]
+];

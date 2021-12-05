@@ -21,11 +21,6 @@
                 <SearchCard :imageLink="require('@/assets/img/whiteAlbum2.jpg')" ref="whiteAlbum2"/>
                 <SearchCard :imageLink="require('@/assets/img/EfATaleOfTwo.jpg')" ref="efATaleOfTwo"/>
                 <SearchCard :imageLink="require('@/assets/img/phenomeno.jpg')" ref="phenomeno"/>
-                <!-- <SearchCard :imageLink="require('@/assets/img/cartagra.jpg')" ref="cartagra"/>
-                <SearchCard :imageLink="require('@/assets/img/clannad.png')" ref="clannad"/>
-                <SearchCard :imageLink="require('@/assets/img/crescendo.png')" ref="crescendo"/>
-                <SearchCard :imageLink="require('@/assets/img/karaNoShojo2.jpg')" ref="karaNoShojoEpisode2"/> -->
-
             </div>
 
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -35,6 +30,9 @@
 </template>
 
 <script>
+import {searchList} from '@/assets/json/searchList.js';
+import FuzzySet from 'fuzzyset.js';
+
 import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
 import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
 import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
@@ -61,38 +59,41 @@ export default {
             pageCount: 2,
             currentPage: 1,
             
-            searchAreaElements: null
+            searchAreaElements: null,
+            fuzzySearchList: []
         }
     },
     methods:{
         searchPageUpdated(page){
             this.currentPage = page;
             console.log(`new page : ${page}`)
+        },
+        createSearchListFromManifest(){
+            let list = [];
+            searchList.forEach(function(element){
+                list.push(element.name);
+            }.bind(this));
+            this.fuzzySearchList = FuzzySet(list);
         }
     },
     watch:{
         searchBarValue: {
-            handler(newValue){
-                console.log(`new value updated : ${newValue.searchBarValue} `);
+            handler(valueElement){
+                //the 0.05 is the minimum similarity required for a match.. I dunno the exact maths but 0.01 seems to work?.
+                let list = this.fuzzySearchList.get(valueElement.searchBarValue,'test',0.01); 
+                console.log(list);
             },
             deep: true,
+            immediate: false
         }
     },
     inject:["searchBarValue"],
     mounted(){
-        // console.log(this.searchBarValue);
-        // let value = Object.values(this.$refs)
-        
-        // this.searchAreaElements = value.map(function(val){
-        //     if(val.$el.parentElement === this.$el.querySelector('.searchCardArea'))
-        //         return val.$el;
-        // }.bind(this));
+        //get the search area elements from the browser dom
+        this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
 
-        // console.log('printing search Area Elements');
-        // console.log(this.searchAreaElements);
-
-        //this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
-        console.log(this.searchAreaElements);
+        //create the search list from the manifest in posession
+        this.createSearchListFromManifest();
     }
 }
 </script>
