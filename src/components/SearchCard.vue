@@ -3,7 +3,7 @@
     @after-leave="cardHiddenSuccessfully"
     @after-enter="cardDisplayedSuccessfully">
 
-        <n-card hoverable title="Card with Cover" v-show="show">
+        <n-card hoverable title="Card with Cover" v-show="show & propShow">
             <template #cover>
                 <img :src="imageLink" />
             </template>
@@ -41,6 +41,10 @@ export default {
         },
         tags:{
             default: []
+        },
+        propShow:{
+            type: Boolean,
+            default: true
         }
     },
     data(){

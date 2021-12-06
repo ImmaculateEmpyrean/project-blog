@@ -11,10 +11,33 @@
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
             <div class="searchCardArea" id="searchCardArea">
-                <SearchCard :imageLink="imageSearchCard0" :tags="tagsSearchCard0" :cardTitle="titleCard0" ref="searchCard0"/>
-                <SearchCard :imageLink="imageSearchCard1" :tags="tagsSearchCard1" :cardTitle="titleCard1" ref="searchCard1"/>
-                <SearchCard :imageLink="imageSearchCard2" :tags="tagsSearchCard2" :cardTitle="titleCard2" ref="searchCard2"/>
-                <SearchCard :imageLink="imageSearchCard3" :tags="tagsSearchCard3" :cardTitle="titleCard3" ref="searchCard3"/>
+                <SearchCard
+                    :propShow   ="showSearchCard0"
+                    :cardTitle  ="titleSearchCard0"
+                    :imageLink  ="imageSearchCard0"
+                    :tags       ="tagsSearchCard0"
+                ref="searchCard0"/>
+
+                <SearchCard
+                    :propShow   ="showSearchCard1"
+                    :cardTitle  ="titleSearchCard1"
+                    :imageLink  ="imageSearchCard1"
+                    :tags       ="tagsSearchCard1"
+                ref="searchCard1"/>
+
+                <SearchCard
+                    :propShow   ="showSearchCard2"
+                    :cardTitle  ="titleSearchCard2"
+                    :imageLink  ="imageSearchCard2"
+                    :tags       ="tagsSearchCard2"
+                ref="searchCard2"/>
+
+                <SearchCard
+                    :propShow   ="showSearchCard3"
+                    :cardTitle  ="titleSearchCard3"
+                    :imageLink  ="imageSearchCard3"
+                    :tags       ="tagsSearchCard3"
+                ref="searchCard3"/>
             </div>
 
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -54,9 +77,9 @@ export default {
             
             searchAreaElements: null,
             fuzzySearchList: [],
-            list: [], //list of all the names inside that are to be displayed in the search area now with respect to all pages..  
+            list: [], //list of all the names inside that are to be displayed in the search area now with respect to all pages.
 
-            tagsSearchCard0: [],
+            tagsSearchCard0: ["Romance"],
             tagsSearchCard1: [],
             tagsSearchCard2: [],
             tagsSearchCard3: [],
@@ -66,36 +89,83 @@ export default {
             imageSearchCard2: require('@/assets/img/noImage.png'),
             imageSearchCard3: require('@/assets/img/noImage.png'),
 
-            titleCard0: "title card 0",
-            titleCard1: "title card 1",
-            titleCard2: "title card 2",
-            titleCard3: "title card 3",
+            titleSearchCard0: "title card 0",
+            titleSearchCard1: "title card 1",
+            titleSearchCard2: "title card 2",
+            titleSearchCard3: "title card 3",
+
+            showSearchCard0: true,
+            showSearchCard1: true,
+            showSearchCard2: true,
+            showSearchCard3: true,
         }
     },
     methods:{
         searchPageUpdated(page){
             this.currentPage = page;
-            console.log(`new page : ${page}`)
+            this.populateSearchCards();
         },
         createSearchListFromManifest(){
             let list = Object.keys(searchList);
+
             this.fuzzySearchList = FuzzySet(list); //create a fuzzy list from the array of names I have.
+            this.list = list;
         },
-        updatePagination(numberOfItems){
+        updatePagination(){
+            let numberOfItems = this.list.length; 
+
             this.currentPage = 1;
             this.pageCount = parseInt(numberOfItems / 4);
-            if(numberOfItems % 4 > 0)
+            if(numberOfItems % 4 > 0){
                 this.pageCount = this.pageCount + 1;
+            }
+                
         },
         populateSearchCards(){
-            // let endIndex = this.pageNumber * 4;
             
-            // let fourthItem  = this.list[endIndex - 1];
-            // let thirdItem   = this.list[endIndex - 2];
-            // let secondItem  = this.list[endIndex - 3];
-            // let firstItem   = this.list[endIndex - 4];
+            //turn on or off the fourth card
+            let thirdIndex = (this.currentPage * 4) - 1;
+            if(this.list.length - 1 < thirdIndex)
+                this.showSearchCard3 = false;
+            else {
+                this.showSearchCard3 = true;
 
+                this.imageSearchCard3 = searchList[this.list[thirdIndex]].img;
+                this.titleSearchCard3 = this.list[thirdIndex];
+            }
+            
+            //turn on or off the third card
+            let secondIndex = (this.currentPage * 4) - 2;
+            if(this.list.length - 1 < secondIndex)
+                this.showSearchCard2 = false;
+            else {
+                this.showSearchCard2 = true;
 
+                this.imageSearchCard2 = searchList[this.list[secondIndex]].img;
+                this.titleSearchCard2 = this.list[secondIndex]
+            }
+
+            //turn on or off the second card
+            let firstIndex = (this.currentPage * 4) - 3;
+            if(this.list.length - 1 < firstIndex)
+                this.showSearchCard1 = false;
+            else {
+                this.showSearchCard1 = true;
+
+                this.imageSearchCard1 = searchList[this.list[firstIndex]].img;
+                this.titleSearchCard1 = this.list[firstIndex]
+            }
+
+            //turn on or off the first card
+            let zeroIndex = (this.currentPage * 4) - 4;
+            if(this.list.length - 1 < zeroIndex)
+                this.showSearchCard0 = false;
+            else {
+                this.showSearchCard0 = true;
+
+                this.imageSearchCard0 = searchList[this.list[zeroIndex]].img;
+                this.titleSearchCard0 = this.list[zeroIndex]
+            }
         },
         hideSearchCards(){
             this.$refs.searchCard0.hideCard();
@@ -111,8 +181,8 @@ export default {
 
                 if(valueElement.searchBarValue === ''){
                     this.list = this.fuzzySearchList.values();
-                    this.updatePagination(this.list.length);
-                    console.log(this.list);
+                    this.updatePagination();
+                    this.populateSearchCards();
                     return;
                 }
 
@@ -127,14 +197,13 @@ export default {
                     this.pageCount = 1;
 
                     this.noResultsFound = true;
-
-                    console.log('no results found')
+                    this.populateSearchCards();
                 }
                 else{
-                    this.updatePagination(this.list.length);
+                    this.updatePagination();
                     this.noResultsFound = false;
 
-                    console.log(this.list);
+                    this.populateSearchCards();
                 }
             },
             deep: true,
@@ -145,6 +214,9 @@ export default {
     mounted(){
         //create the search list from the manifest in posession
         this.createSearchListFromManifest();
+
+        //update pagination properly
+        this.updatePagination();
 
         //get the search area elements from the browser dom
         this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
