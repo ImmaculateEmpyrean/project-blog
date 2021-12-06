@@ -1,21 +1,20 @@
 <template>
-    <transition enter-active-class="animate__animated animate__zoomIn" leave-active-class="animate__animated animate__zoomOut">
+    <transition enter-active-class="animate__animated animate__zoomIn" leave-active-class="animate__animated animate__zoomOut"
+    @after-leave="cardHiddenSuccessfully"
+    @after-enter="cardDisplayedSuccessfully">
+
         <n-card hoverable title="Card with Cover" v-show="show">
             <template #cover>
                 <img :src="imageLink" />
             </template>
             
             <template #header>
-                <h1 class="subtitle smaller-size">{{cardTitle}}</h1>
+                <h1 class="subtitle smaller-size">{{cardTitleData}}</h1>
                 <div class="tagWrapper">
-                    <!-- <slot name="tagBox"></slot> -->
                 </div>
             </template>
-            
-            <!-- <p class="bodyText" v-show="!isMobileConfiguration()">
-                {{cardContent}}
-            </p> -->
         </n-card>
+
     </transition>
 </template>
 
@@ -23,6 +22,8 @@
 import {NCard} from 'naive-ui';
 import {isMobile} from '../javascript/breakpoints.js'
 import {tagColors} from '@/javascript/tagColors';
+
+import Timer from "easytimer.js";
 
 export default {
     name: "SearchCard",
@@ -38,17 +39,15 @@ export default {
             type: String,
             default: "NoTitle"
         },
-        // cardContent:{
-        //     type: String,
-        //     default: "There Is No Content In This Card To Bother About"
-        // },
         tags:{
             default: []
         }
     },
     data(){
         return {
-            show: true
+            show: true,
+            updateInformationTimer: null,
+            cardTitleData: "NoTitle",
         }
     },
     methods: {
@@ -57,6 +56,7 @@ export default {
         },
         mountTags(){
             let tagWrapper = this.$el.querySelector('.tagWrapper');
+            tagWrapper.innerHTML = "";
         
             this.tags.forEach(function(tagName){
                 let tag = document.createElement("div");
@@ -81,10 +81,36 @@ export default {
         },
         toggleShow(){
             this.show = !this.show;
+        },
+
+        cardHiddenSuccessfully(){
+            this.cardTitleData = this.cardTitle;
+            this.mountTags();
+
+            this.showCard();
+        },
+        cardDisplayedSuccessfully(){
+            this.updateInformationTimer.reset();
+            this.updateInformationTimer.start();
         }
     },
     mounted(){
+        this.cardTitleData = this.cardTitle;
         this.mountTags();
+
+        //initialize the timer..
+        this.updateInformationTimer = new Timer();
+        this.updateInformationTimer.start();
+
+        this.updateInformationTimer.addEventListener("secondsUpdated", function () {
+            if(this.updateInformationTimer.getTimeValues().seconds > 2){
+                if(this.cardTitleData !== this.cardTitle){
+                    this.hideCard();
+                    this.updateInformationTimer.stop();
+                }
+                this.updateInformationTimer.reset();
+            }
+        }.bind(this));
     }
 }
 </script>
