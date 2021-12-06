@@ -1,13 +1,13 @@
 <template>
     <div class="searchPage">
-        <div class="buttonRack bodyText">
+        <div class="buttonRack bodyText" id="buttonRack">
             <SelectTagsButton />
             <BlackListButton />
             <PublisherTagsButton />
             <SortByButton />
         </div>
 
-        <div class="searchShowArea">
+        <div class="searchShowArea" id="searchShowArea">
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
             <div class="searchCardArea" id="searchCardArea">
@@ -49,6 +49,7 @@
 <script>
 import {searchList} from '@/assets/json/searchList.js';
 import FuzzySet from 'fuzzyset.js';
+import {allImagesOnPageLoaded} from '../javascript/imageLoaderCore.js';
 
 import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
 import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
@@ -173,6 +174,28 @@ export default {
             this.showSearchCard1 = false;
             this.showSearchCard2 = false;
             this.showSearchCard3 = false;
+        },
+
+
+        setPageMaxHeight(){
+            let buttonRack = this.$el.querySelector('#buttonRack');
+            let buttonRackStyle = window.getComputedStyle(buttonRack);
+            let buttonRackHeight = parseInt(buttonRackStyle.getPropertyValue('height'))
+
+            let searchShowArea = this.$el.querySelector('#searchShowArea');
+            let searchShowAreaChildren = searchShowArea.childNodes;
+
+            let totalHeight = 0;
+            searchShowAreaChildren.forEach(function(element){
+                console.log(`childHeight : ${element.offsetHeight}`)
+                totalHeight = totalHeight + element.offsetHeight;
+            })
+
+            console.log(`total height of the search show area : ${totalHeight}`);
+            console.log(`total height of the button rack : ${buttonRackHeight}`)
+
+            // let searchPage = this.$el;
+            this.$el.style.maxHeight = `${totalHeight + buttonRackHeight}px`
         }
     },
     watch:{
@@ -223,6 +246,23 @@ export default {
         this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
 
         this.populateSearchCards();
+
+
+        //sandbox//
+
+        // this.setPageMaxHeight();
+        // let searchShowArea = document.getElementById('searchShowArea');
+        // searchShowArea.addEventListener('load',function(){
+        //     console.log('load event triggered')
+        //     this.setPageMaxHeight();
+        // }.bind(this));
+
+        allImagesOnPageLoaded(function(){
+            console.log('load event triggered')
+            this.setPageMaxHeight();
+        }.bind(this))
+
+        //sandbox//
     }
 }
 </script>
@@ -232,7 +272,12 @@ export default {
     @import '../assets/scss/columns.scss';
     
     .searchPage{
+        transition: max-height ease-in-out 2s;
+        overflow-y: hidden;
+        height: 999999px;
+
         min-height: 85vh;
+        
 
         display: flex;
         flex-direction: column;
