@@ -1,6 +1,6 @@
 <template>
     <div class="pagination">    
-        <n-pagination :page-count="pageCount" :on-update:page="searchPageUpdated">
+        <n-pagination :page-count="pageCount" :on-update:page="searchPageUpdated" :page="page">
             
             <template #prev>
                 <n-button icon-placement="left" type="primary">
@@ -36,6 +36,9 @@ export default {
     props:{
         pageCount:{
             default: 2
+        },
+        page:{
+            default: 1
         }
     },
     methods: {
