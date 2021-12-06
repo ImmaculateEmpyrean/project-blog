@@ -11,16 +11,10 @@
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
 
             <div class="searchCardArea" id="searchCardArea">
-
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" :tags="['Romance']" ref="searchCard0">
-                    <!-- <template #tagBox>
-                        <Tag :tagName="Romance" />
-                    </template> -->
-                </SearchCard>
-
-                <SearchCard :imageLink="require('@/assets/img/whiteAlbum2.jpg'  )"  ref="searchCard1"/>
-                <SearchCard :imageLink="require('@/assets/img/EfATaleOfTwo.jpg' )"  ref="searchCard2"/>
-                <SearchCard :imageLink="require('@/assets/img/phenomeno.jpg'    )"  ref="searchCard3"/>
+                <SearchCard :imageLink="imageSearchCard0" :tags="tagsSearchCard0" :cardTitle="titleCard0" ref="searchCard0"/>
+                <SearchCard :imageLink="imageSearchCard1" :tags="tagsSearchCard1" :cardTitle="titleCard1" ref="searchCard1"/>
+                <SearchCard :imageLink="imageSearchCard2" :tags="tagsSearchCard2" :cardTitle="titleCard2" ref="searchCard2"/>
+                <SearchCard :imageLink="imageSearchCard3" :tags="tagsSearchCard3" :cardTitle="titleCard3" ref="searchCard3"/>
             </div>
 
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -37,7 +31,6 @@ import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
 import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
 import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
 import SortByButton from '@/components/SearchPage/SortByButton.vue';
-// import Tag from '../components/SearchPage/Tag.vue';
 
 import Pagination from '@/components/Pagination.vue';
 import SearchCard from '@/components/SearchCard.vue';
@@ -51,8 +44,7 @@ export default {
         PublisherTagsButton,
         SortByButton,
 
-        SearchCard,
-        // Tag
+        SearchCard
     },
     data(){
         return{
@@ -61,7 +53,23 @@ export default {
             noResultsFound: false,
             
             searchAreaElements: null,
-            fuzzySearchList: []
+            fuzzySearchList: [],
+            list: [], //list of all the names inside that are to be displayed in the search area now with respect to all pages..  
+
+            tagsSearchCard0: [],
+            tagsSearchCard1: [],
+            tagsSearchCard2: [],
+            tagsSearchCard3: [],
+
+            imageSearchCard0: require('@/assets/img/noImage.png'),
+            imageSearchCard1: require('@/assets/img/noImage.png'),
+            imageSearchCard2: require('@/assets/img/noImage.png'),
+            imageSearchCard3: require('@/assets/img/noImage.png'),
+
+            titleCard0: "title card 0",
+            titleCard1: "title card 1",
+            titleCard2: "title card 2",
+            titleCard3: "title card 3",
         }
     },
     methods:{
@@ -72,40 +80,61 @@ export default {
         createSearchListFromManifest(){
             let list = Object.keys(searchList);
             this.fuzzySearchList = FuzzySet(list); //create a fuzzy list from the array of names I have.
+        },
+        updatePagination(numberOfItems){
+            this.currentPage = 1;
+            this.pageCount = parseInt(numberOfItems / 4);
+            if(numberOfItems % 4 > 0)
+                this.pageCount = this.pageCount + 1;
+        },
+        populateSearchCards(){
+            // let endIndex = this.pageNumber * 4;
+            
+            // let fourthItem  = this.list[endIndex - 1];
+            // let thirdItem   = this.list[endIndex - 2];
+            // let secondItem  = this.list[endIndex - 3];
+            // let firstItem   = this.list[endIndex - 4];
+
+
+        },
+        hideSearchCards(){
+            this.$refs.searchCard0.hideCard();
+            this.$refs.searchCard1.hideCard();
+            this.$refs.searchCard2.hideCard();
+            this.$refs.searchCard3.hideCard();
         }
     },
     watch:{
         searchBarValue: {
             handler(valueElement){
+                this.hideSearchCards();
+
                 if(valueElement.searchBarValue === ''){
-                    list = this.fuzzySearchList.values();
-                    console.log(list);
+                    this.list = this.fuzzySearchList.values();
+                    this.updatePagination(this.list.length);
+                    console.log(this.list);
                     return;
                 }
 
                 //the 0.05 is the minimum similarity required for a match.. I dunno the exact maths but 0.01 seems to work?.
-                let list = this.fuzzySearchList.get(valueElement.searchBarValue,[],0.01);
-                list = list.map(function(element){
+                this.list = this.fuzzySearchList.get(valueElement.searchBarValue,[],0.01);
+                this.list = this.list.map(function(element){
                     return element[1]
                 })
                 
-                if(list.length === 0){
-                    this.currentPage = 0;
-                    this.pageCount = 0;
+                if(this.list.length === 0){
+                    this.currentPage = 1;
+                    this.pageCount = 1;
 
                     this.noResultsFound = true;
 
                     console.log('no results found')
                 }
                 else{
-                    this.currentPage = 1;
-                    this.pageCount = parseInt(list.length / 4);
-                    if(list.length % 4 > 0)
-                        this.pageCount = this.pageCount + 1;
-                    
+                    this.updatePagination(this.list.length);
                     this.noResultsFound = false;
 
-                    console.log(list);
+                    console.log(this.list);
                 }
             },
             deep: true,

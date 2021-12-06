@@ -12,9 +12,9 @@
                 </div>
             </template>
             
-            <p class="bodyText" v-show="!isMobileConfiguration()">
+            <!-- <p class="bodyText" v-show="!isMobileConfiguration()">
                 {{cardContent}}
-            </p>
+            </p> -->
         </n-card>
     </transition>
 </template>
@@ -38,10 +38,10 @@ export default {
             type: String,
             default: "NoTitle"
         },
-        cardContent:{
-            type: String,
-            default: "There Is No Content In This Card To Bother About"
-        },
+        // cardContent:{
+        //     type: String,
+        //     default: "There Is No Content In This Card To Bother About"
+        // },
         tags:{
             default: []
         }
@@ -55,6 +55,23 @@ export default {
         isMobileConfiguration(){
             return isMobile();
         },
+        mountTags(){
+            let tagWrapper = this.$el.querySelector('.tagWrapper');
+        
+            this.tags.forEach(function(tagName){
+                let tag = document.createElement("div");
+                tag.classList.add("searchCardTag");
+                tag.innerHTML = `<h3 class="bodyText text-smaller">${tagName}</h3>`
+
+                tag.style.borderColor = tagColors[tagName].textColor;
+                tag.style.backgroundColor = tagColors[tagName].color;
+                
+                let innerTextNode = tag.querySelector('h3');
+                innerTextNode.style.color = tagColors[tagName].textColor;
+
+                tagWrapper.appendChild(tag);
+            });
+        },
 
         showCard(){
             this.show = true;
@@ -67,21 +84,7 @@ export default {
         }
     },
     mounted(){
-        let tagWrapper = this.$el.querySelector('.tagWrapper');
-        
-        this.tags.forEach(function(tagName){
-            let tag = document.createElement("div");
-            tag.classList.add("searchCardTag");
-            tag.innerHTML = `<h3 class="bodyText text-smaller">${tagName}</h3>`
-
-            tag.style.borderColor = tagColors[tagName].textColor;
-            tag.style.backgroundColor = tagColors[tagName].color;
-            
-            let innerTextNode = tag.querySelector('h3');
-            innerTextNode.style.color = tagColors[tagName].textColor;
-
-            tagWrapper.appendChild(tag);
-        });
+        this.mountTags();
     }
 }
 </script>
