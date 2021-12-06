@@ -128,7 +128,11 @@ export default {
     @use '../assets/scss/setting' as *;
 
     .n-card {
-        flex: 1 1 40%;
+        flex: 1 1 100%;
+        @include for-tablet-portrait-up{
+            flex: 1 1 40%;
+        }
+        
         text-align: center;
         cursor: pointer;
 
