@@ -5,7 +5,7 @@
 
         <n-card hoverable title="Card with Cover" v-show="show & propShow">
             <template #cover>
-                <img :src="imageLink" />
+                <img :src="imageLinkData" />
             </template>
             
             <template #header>
@@ -51,7 +51,9 @@ export default {
         return {
             show: true,
             updateInformationTimer: null,
+
             cardTitleData: "NoTitle",
+            imageLinkData: require('@/assets/img/noImage.png'),
         }
     },
     methods: {
@@ -87,10 +89,14 @@ export default {
             this.show = !this.show;
         },
 
-        cardHiddenSuccessfully(){
+        updateCard(){
             this.cardTitleData = this.cardTitle;
+            this.imageLinkData = this.imageLink;
             this.mountTags();
+        },
 
+        cardHiddenSuccessfully(){
+            this.updateCard();
             this.showCard();
         },
         cardDisplayedSuccessfully(){
@@ -99,15 +105,14 @@ export default {
         }
     },
     mounted(){
-        this.cardTitleData = this.cardTitle;
-        this.mountTags();
+        this.updateCard();
 
         //initialize the timer..
         this.updateInformationTimer = new Timer();
         this.updateInformationTimer.start();
 
         this.updateInformationTimer.addEventListener("secondsUpdated", function () {
-            if(this.updateInformationTimer.getTimeValues().seconds > 2){
+            if(this.updateInformationTimer.getTimeValues().seconds > 1){
                 if(this.cardTitleData !== this.cardTitle){
                     this.hideCard();
                     this.updateInformationTimer.stop();

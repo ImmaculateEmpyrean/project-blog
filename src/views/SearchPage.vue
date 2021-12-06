@@ -84,15 +84,15 @@ export default {
             tagsSearchCard2: [],
             tagsSearchCard3: [],
 
-            imageSearchCard0: require('@/assets/img/noImage.png'),
-            imageSearchCard1: require('@/assets/img/noImage.png'),
-            imageSearchCard2: require('@/assets/img/noImage.png'),
-            imageSearchCard3: require('@/assets/img/noImage.png'),
+            imageSearchCard0: searchList[Object.keys(searchList)[0]].img,
+            imageSearchCard1: searchList[Object.keys(searchList)[1]].img,
+            imageSearchCard2: searchList[Object.keys(searchList)[2]].img,
+            imageSearchCard3: searchList[Object.keys(searchList)[3]].img,
 
-            titleSearchCard0: "title card 0",
-            titleSearchCard1: "title card 1",
-            titleSearchCard2: "title card 2",
-            titleSearchCard3: "title card 3",
+            titleSearchCard0: Object.keys(searchList)[0],
+            titleSearchCard1: Object.keys(searchList)[1],
+            titleSearchCard2: Object.keys(searchList)[2],
+            titleSearchCard3: Object.keys(searchList)[3],
 
             showSearchCard0: true,
             showSearchCard1: true,
@@ -220,6 +220,8 @@ export default {
 
         //get the search area elements from the browser dom
         this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
+
+        this.populateSearchCards();
     }
 }
 </script>
