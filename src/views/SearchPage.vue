@@ -12,15 +12,15 @@
 
             <div class="searchCardArea" id="searchCardArea">
 
-                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" ref="koiToSenkyoToChocolate" >
-                    <template #tagBox>
+                <SearchCard :imageLink="require('@/assets/img/koiChoco.jpg')" :tags="['Romance']" ref="searchCard0">
+                    <!-- <template #tagBox>
                         <Tag :tagName="Romance" />
-                    </template>
+                    </template> -->
                 </SearchCard>
 
-                <SearchCard :imageLink="require('@/assets/img/whiteAlbum2.jpg')" ref="whiteAlbum2"/>
-                <SearchCard :imageLink="require('@/assets/img/EfATaleOfTwo.jpg')" ref="efATaleOfTwo"/>
-                <SearchCard :imageLink="require('@/assets/img/phenomeno.jpg')" ref="phenomeno"/>
+                <SearchCard :imageLink="require('@/assets/img/whiteAlbum2.jpg'  )"  ref="searchCard1"/>
+                <SearchCard :imageLink="require('@/assets/img/EfATaleOfTwo.jpg' )"  ref="searchCard2"/>
+                <SearchCard :imageLink="require('@/assets/img/phenomeno.jpg'    )"  ref="searchCard3"/>
             </div>
 
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -37,7 +37,7 @@ import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
 import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
 import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
 import SortByButton from '@/components/SearchPage/SortByButton.vue';
-import Tag from '../components/SearchPage/Tag.vue';
+// import Tag from '../components/SearchPage/Tag.vue';
 
 import Pagination from '@/components/Pagination.vue';
 import SearchCard from '@/components/SearchCard.vue';
@@ -52,7 +52,7 @@ export default {
         SortByButton,
 
         SearchCard,
-        Tag
+        // Tag
     },
     data(){
         return{

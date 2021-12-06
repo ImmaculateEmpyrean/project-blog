@@ -2,7 +2,7 @@
 @use './color' as *;
 
 *{
-    --font-small: 12px;
+    --font-small: 10px;
     --font-normal: 16px;
     --font-large: 20px;
     --font-larger: 32px;
@@ -10,7 +10,7 @@
 
 @include for-tablet-portrait-up{
     *{
-        --font-small: 14px;
+        --font-small: 12px;
         --font-normal: 18px;
         --font-large: 28px;
         --font-larger: 40px;
@@ -19,7 +19,7 @@
 
 @include for-desktop-up{
     *{
-        --font-small: 16px;
+        --font-small: 14px;
         --font-normal: 20px;
         --font-large: 28px;
         --font-larger: 40px;
@@ -88,6 +88,10 @@
 
     &.bold{
         font-weight: 550;
+    }
+
+    &.text-smaller{
+        font-size: var(--font-small);
     }
 }
 
