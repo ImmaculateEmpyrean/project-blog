@@ -102,6 +102,9 @@ export default {
         cardDisplayedSuccessfully(){
             this.updateInformationTimer.reset();
             this.updateInformationTimer.start();
+
+            console.log('emiting card displayed')
+            this.$emit('cardDisplayed');
         }
     },
     mounted(){

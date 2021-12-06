@@ -16,6 +16,8 @@
                     :cardTitle  ="titleSearchCard0"
                     :imageLink  ="imageSearchCard0"
                     :tags       ="tagsSearchCard0"
+
+                    @cardDisplayed="fixPageHeight"
                 />
 
                 <SearchCard
@@ -23,6 +25,8 @@
                     :cardTitle  ="titleSearchCard1"
                     :imageLink  ="imageSearchCard1"
                     :tags       ="tagsSearchCard1"
+
+                    @cardDisplayed="fixPageHeight"
                 />
 
                 <SearchCard
@@ -30,6 +34,8 @@
                     :cardTitle  ="titleSearchCard2"
                     :imageLink  ="imageSearchCard2"
                     :tags       ="tagsSearchCard2"
+
+                    @cardDisplayed="fixPageHeight"
                 />
 
                 <SearchCard
@@ -37,6 +43,8 @@
                     :cardTitle  ="titleSearchCard3"
                     :imageLink  ="imageSearchCard3"
                     :tags       ="tagsSearchCard3"
+
+                    @cardDisplayed="fixPageHeight"
                 />
             </div>
 
@@ -183,19 +191,27 @@ export default {
             let buttonRackHeight = parseInt(buttonRackStyle.getPropertyValue('height'))
 
             let searchShowArea = this.$el.querySelector('#searchShowArea');
+            
+            let searchCardArea = this.$el.querySelector('#searchCardArea')
+            let searchCardAreaStyle = window.getComputedStyle(searchCardArea);
+            let searchCardAreaMarginHeight = parseInt(searchCardAreaStyle.getPropertyValue('margin-top')) + parseInt(searchCardAreaStyle.getPropertyValue('margin-bottom'));
+
             let searchShowAreaChildren = searchShowArea.childNodes;
 
-            let totalHeight = 0;
+            let showAreaHeight = 0;
             searchShowAreaChildren.forEach(function(element){
-                console.log(`childHeight : ${element.offsetHeight}`)
-                totalHeight = totalHeight + element.offsetHeight;
+                showAreaHeight = showAreaHeight + element.offsetHeight;
+                console.log(element.offsetHeight)
             })
 
-            console.log(`total height of the search show area : ${totalHeight}`);
-            console.log(`total height of the button rack : ${buttonRackHeight}`)
-
-            // let searchPage = this.$el;
-            this.$el.style.maxHeight = `${totalHeight + buttonRackHeight}px`
+            this.$el.style.maxHeight = `${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`;
+            console.log(searchCardAreaMarginHeight);
+        },
+        fixPageHeight(){
+            allImagesOnPageLoaded(function(){
+                console.log('setting height')
+                this.setPageMaxHeight();
+            }.bind(this))
         }
     },
     watch:{
@@ -249,19 +265,9 @@ export default {
 
 
         //sandbox//
-
-        // this.setPageMaxHeight();
-        // let searchShowArea = document.getElementById('searchShowArea');
-        // searchShowArea.addEventListener('load',function(){
-        //     console.log('load event triggered')
-        //     this.setPageMaxHeight();
-        // }.bind(this));
-
         allImagesOnPageLoaded(function(){
-            console.log('load event triggered')
             this.setPageMaxHeight();
         }.bind(this))
-
         //sandbox//
     }
 }
@@ -276,7 +282,7 @@ export default {
         overflow-y: hidden;
         height: 999999px;
 
-        min-height: 85vh;
+        // min-height: 85vh;
         
 
         display: flex;
