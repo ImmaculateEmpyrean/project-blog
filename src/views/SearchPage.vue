@@ -16,28 +16,28 @@
                     :cardTitle  ="titleSearchCard0"
                     :imageLink  ="imageSearchCard0"
                     :tags       ="tagsSearchCard0"
-                ref="searchCard0"/>
+                />
 
                 <SearchCard
                     :propShow   ="showSearchCard1"
                     :cardTitle  ="titleSearchCard1"
                     :imageLink  ="imageSearchCard1"
                     :tags       ="tagsSearchCard1"
-                ref="searchCard1"/>
+                />
 
                 <SearchCard
                     :propShow   ="showSearchCard2"
                     :cardTitle  ="titleSearchCard2"
                     :imageLink  ="imageSearchCard2"
                     :tags       ="tagsSearchCard2"
-                ref="searchCard2"/>
+                />
 
                 <SearchCard
                     :propShow   ="showSearchCard3"
                     :cardTitle  ="titleSearchCard3"
                     :imageLink  ="imageSearchCard3"
                     :tags       ="tagsSearchCard3"
-                ref="searchCard3"/>
+                />
             </div>
 
             <Pagination :page="currentPage" :pageCount="pageCount" @on-update:page="searchPageUpdated"/>
@@ -122,6 +122,7 @@ export default {
                 
         },
         populateSearchCards(){
+            console.log('populating search cards')
             
             //turn on or off the fourth card
             let thirdIndex = (this.currentPage * 4) - 1;
@@ -168,10 +169,10 @@ export default {
             }
         },
         hideSearchCards(){
-            this.$refs.searchCard0.hideCard();
-            this.$refs.searchCard1.hideCard();
-            this.$refs.searchCard2.hideCard();
-            this.$refs.searchCard3.hideCard();
+            this.showSearchCard0 = false;
+            this.showSearchCard1 = false;
+            this.showSearchCard2 = false;
+            this.showSearchCard3 = false;
         }
     },
     watch:{

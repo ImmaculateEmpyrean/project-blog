@@ -108,11 +108,11 @@ export default {
         this.updateCard();
 
         //initialize the timer..
-        this.updateInformationTimer = new Timer();
+        this.updateInformationTimer = new Timer({precision: 'secondTenths'});
         this.updateInformationTimer.start();
 
-        this.updateInformationTimer.addEventListener("secondsUpdated", function () {
-            if(this.updateInformationTimer.getTimeValues().seconds > 1){
+        this.updateInformationTimer.addEventListener("secondTenthsUpdated", function () {
+            if(this.updateInformationTimer.getTimeValues().secondTenths > 5){
                 if(this.cardTitleData !== this.cardTitle){
                     this.hideCard();
                     this.updateInformationTimer.stop();
