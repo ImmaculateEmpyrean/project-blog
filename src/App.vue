@@ -1,11 +1,11 @@
 <template>
     <n-config-provider :theme-overrides="blogTheme">
-        <NavBar @searchBar:update="searchBarUpdated"/>
+        <NavBar @searchBar:update="searchBarUpdated" @size:change="navBarSizeChanged"/>
         <div class="constrainer">
 
             <router-view v-slot="{Component}">
                 <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
-                    <component :is="Component" />
+                    <component :is="Component" ref="pageInView"/>
                 </transition>
             </router-view>
             
@@ -44,6 +44,14 @@ export default {
 
         searchBarUpdated(payload){
             this.reactiveSearchBarValue.searchBarValue = payload;
+        },
+        navBarSizeChanged(){
+            if(this.$route.fullPath === "/"){
+                this.$refs.pageInView.setLatestPostsSectionHeight();
+                this.$refs.pageInView.setEditorsPickSectionHeight();
+
+                console.log(this.$route);
+            }
         }
     },
     mounted(){

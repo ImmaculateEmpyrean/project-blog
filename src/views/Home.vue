@@ -13,7 +13,7 @@
                     <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
                                 @leave="animateOut" @after-leave="cleanUpAfterOut"     
                                 @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
-                        <KoiChoco   v-show="latestPostDisplayCounter===0" data-post="latestPost" ref="latestPostInitialComponent"
+                        <KoiChoco   v-show="latestPostDisplayCounter===0" data-post="latestPost"
                                     @leftArrow:clicked="latestLeftArrowClicked" @rightArrow:clicked="latestRightArrowClicked"
                         />
                     </transition>
@@ -49,7 +49,7 @@
                     <transition @enter="animateIn"  @after-enter="cleanUpAfterIn" :duration="1000"
                                 @leave="animateOut" @after-leave="cleanUpAfterOut"     
                                 @leave-cancelled="leaveCancelled"  @enter-cancelled="enterCancelled">
-                        <Phenomeno  v-show="editorsPickPostDisplayCounter===0" data-post="editorsPick" ref="editorsPickInitialComponent"
+                        <Phenomeno  v-show="editorsPickPostDisplayCounter===0" data-post="editorsPick"
                             @leftArrow:clicked="editorsPickLeftArrowClicked" @rightArrow:clicked="editorsPickRightArrowClicked"
                         />
                     </transition>
@@ -127,42 +127,39 @@ export default {
     methods:{
         setLatestPostsSectionHeight(){
             allImagesOnPageLoaded(function(){
+                let finalHeight = 0;
                 let latestPostsSection = this.$el.querySelector('.latestPosts');
-
-                let computedStyle = window.getComputedStyle(this.$refs.latestPostInitialComponent.$el);
-                let marginValue = parseInt(computedStyle.getPropertyValue('margin-top'));
-                marginValue = marginValue + parseInt(computedStyle.getPropertyValue('margin-bottom'));
-
-                let latestPostInitialComponentHeight = 0;
-                let gapValue = parseInt(computedStyle.getPropertyValue('row-gap'));
-
-                this.$refs.latestPostInitialComponent.$el.childNodes.forEach(function(node){
-                    latestPostInitialComponentHeight = latestPostInitialComponentHeight + parseInt(node.offsetHeight); 
-                    latestPostInitialComponentHeight = latestPostInitialComponentHeight + gapValue;
+                latestPostsSection.childNodes.forEach(function(el){
+                    let elementComputedStyle = window.getComputedStyle(el);
+                    if(elementComputedStyle.getPropertyValue("display") === "none"){
+                        return;
+                    }
+                    else{
+                        finalHeight = finalHeight + parseInt(elementComputedStyle.getPropertyValue('height'));
+                    }
                 })
 
-                latestPostsSection.style.maxHeight = `${latestPostInitialComponentHeight + marginValue}px`;
-                console.log(`latestPostsSection.style.maxHeight = ${latestPostInitialComponentHeight + marginValue}px;`)
+                latestPostsSection.style.maxHeight = `${finalHeight}px`;
+                console.log(`latestPostsSection.style.maxHeight = ${finalHeight}px;`)
             }.bind(this))
         },
         setEditorsPickSectionHeight(){
             allImagesOnPageLoaded(function(){
+                let finalHeight = 0;
                 let editorsPickSection = this.$el.querySelector('.editorsPick');
-                
-                let computedStyle = window.getComputedStyle(this.$refs.editorsPickInitialComponent.$el);
-                let marginValue = parseInt(computedStyle.getPropertyValue('margin-top'));
-                marginValue = marginValue + parseInt(computedStyle.getPropertyValue('margin-bottom'));
 
-                let editorsPickInitialComponentHeight = 0;
-                let gapValue = parseInt(computedStyle.getPropertyValue('row-gap'));
-
-                this.$refs.editorsPickInitialComponent.$el.childNodes.forEach(function(node){
-                    editorsPickInitialComponentHeight = editorsPickInitialComponentHeight + parseInt(node.offsetHeight); 
-                    editorsPickInitialComponentHeight = editorsPickInitialComponentHeight + gapValue;
+                editorsPickSection.childNodes.forEach(function(el){
+                    let elementComputedStyle = window.getComputedStyle(el);
+                    if(elementComputedStyle.getPropertyValue("display") === "none"){
+                        return;
+                    }
+                    else{
+                        finalHeight = finalHeight + parseInt(elementComputedStyle.getPropertyValue('height'));
+                    }
                 })
 
-                editorsPickSection.style.maxHeight = `${editorsPickInitialComponentHeight + marginValue}px`;
-                console.log(`editorsPickSection.style.maxHeight = ${editorsPickInitialComponentHeight + marginValue}px;`);
+                editorsPickSection.style.maxHeight = `${finalHeight}px`;
+                console.log(`editorsPickSection.style.maxHeight = ${finalHeight}px;`)
             }.bind(this))
         },
 
@@ -328,6 +325,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         gap: var(--spacing-large);
         
         transition: max-height 2s ease-in-out;
