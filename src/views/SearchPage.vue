@@ -205,11 +205,10 @@ export default {
             let showAreaHeight = 0;
             searchShowAreaChildren.forEach(function(element){
                 showAreaHeight = showAreaHeight + element.offsetHeight;
-                console.log(element.offsetHeight)
             })
 
             this.$el.style.maxHeight = `${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`;
-            console.log(searchCardAreaMarginHeight);
+            console.log(`setting search page height : ${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`)
         },
         fixPageHeight(){
             allImagesOnPageLoaded(function(){
@@ -270,6 +269,7 @@ export default {
 
         //sandbox//
         allImagesOnPageLoaded(function(){
+            console.log('setting height on mounted after images loaded')
             this.setPageMaxHeight();
         }.bind(this))
         //sandbox//
@@ -286,7 +286,7 @@ export default {
         overflow-y: hidden;
         height: 999999px;
 
-        // min-height: 85vh;
+        min-height: 85vh;
         
 
         display: flex;
@@ -320,9 +320,9 @@ export default {
         justify-content: space-between;
         padding: var(--spacing-normal) var(--spacing-large);
 
-        // .n-button{
-        //     flex: 1 1 100%;
-        // }
+        .n-button{
+            flex: 1 1 100%;
+        }
     }
     
     .searchCardArea{

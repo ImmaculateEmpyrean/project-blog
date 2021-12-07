@@ -1,6 +1,6 @@
 <template>
     <n-modal v-model:show="showModal" transform-origin="center">
-        <n-card style="width: 600px;" title="Okay" :bordered="false" size="huge">
+        <n-card :title="cardTitle" :bordered="false" size="huge">
             <template #header-extra>
                 Great
             </template>
@@ -21,6 +21,12 @@ export default {
         NModal,
         NCard
     },
+    props:{
+        cardTitle:{
+            type: String,
+            default: "NoTitle"
+        }
+    },
     data(){
         return{
             showModal: false
@@ -39,3 +45,15 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    @use "../assets/scss/setting" as *;
+
+    .n-card{
+        width: 70vh;
+        
+        @include for-tablet-portrait-up{
+            width: 50vw;
+        }
+    }
+</style>

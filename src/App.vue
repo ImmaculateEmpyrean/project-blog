@@ -2,9 +2,13 @@
     <n-config-provider :theme-overrides="blogTheme">
         <NavBar @searchBar:update="searchBarUpdated"/>
         <div class="constrainer">
-            <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
-                <router-view></router-view>
-            </transition>
+
+            <router-view v-slot="{Component}">
+                <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
+                    <component :is="Component" />
+                </transition>
+            </router-view>
+            
         </div>
         <FooterComponent />
     </n-config-provider>
