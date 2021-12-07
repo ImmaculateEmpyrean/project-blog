@@ -320,9 +320,9 @@ export default {
         justify-content: space-between;
         padding: var(--spacing-normal) var(--spacing-large);
 
-        .n-button{
-            flex: 1 1 100%;
-        }
+        // .n-button{
+        //     flex: 1 1 100%;
+        // }
     }
     
     .searchCardArea{
