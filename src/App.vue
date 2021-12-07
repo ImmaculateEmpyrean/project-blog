@@ -1,6 +1,6 @@
 <template>
     <n-config-provider :theme-overrides="blogTheme">
-        <NavBar @searchBar:update="searchBarUpdated" @size:change="navBarSizeChanged"/>
+        <NavBar @searchBar:update="searchBarUpdated"/>
         <div class="constrainer">
 
             <router-view v-slot="{Component}">
@@ -44,14 +44,6 @@ export default {
 
         searchBarUpdated(payload){
             this.reactiveSearchBarValue.searchBarValue = payload;
-        },
-        navBarSizeChanged(){
-            if(this.$route.fullPath === "/"){
-                this.$refs.pageInView.setLatestPostsSectionHeight();
-                this.$refs.pageInView.setEditorsPickSectionHeight();
-
-                console.log(this.$route);
-            }
         }
     },
     mounted(){

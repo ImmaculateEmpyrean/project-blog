@@ -72,11 +72,9 @@ export default {
             if(scrolledY > 0 && this.minimized === false){
                 this.$el.classList.add('minimize');
                 this.minimized = true;
-                this.$emit('size:change');
             } else if(scrolledY === 0){
                 this.$el.classList.remove('minimize');
                 this.minimized = false;
-                this.$emit('size:change');
             }
         }.bind(this))
 
