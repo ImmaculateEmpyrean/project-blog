@@ -49,10 +49,15 @@ export default {
 <style lang="scss" scoped>
     @use "../assets/scss/setting" as *;
 
-    .n-card{
-        width: 70vh;
+    .n-card.n-modal{
+        width: 85vw;
+        margin: 0 auto;
         
         @include for-tablet-portrait-up{
+            width: 75vw;
+        }
+
+        @include for-desktop-up{
             width: 50vw;
         }
     }
