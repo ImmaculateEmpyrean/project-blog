@@ -10,9 +10,11 @@
             
             <template #header>
                 <h1 class="subtitle smaller-size">{{cardTitleData}}</h1>
-                <div class="tagWrapper">
-                </div>
             </template>
+
+            <div class="tagWrapper">
+            </div>
+            
         </n-card>
 
     </transition>
