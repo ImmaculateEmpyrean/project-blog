@@ -208,7 +208,8 @@ export default {
             })
 
             this.$el.style.maxHeight = `${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`;
-            console.log(`setting search page height : ${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`)
+            // console.log(`setting search page height : ${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`)
+            // console.log(`showAreaHeight: ${showAreaHeight}`)
         },
         fixPageHeight(){
             allImagesOnPageLoaded(function(){
@@ -266,13 +267,13 @@ export default {
 
         this.populateSearchCards();
 
-
-        //sandbox//
-        allImagesOnPageLoaded(function(){
-            console.log('setting height on mounted after images loaded')
-            this.setPageMaxHeight();
-        }.bind(this))
-        //sandbox//
+        // Initialize the height of the show area for some reason doing last on the current stack seems to work.. 
+        setTimeout(function(){
+            allImagesOnPageLoaded(function(){
+                console.log('setting height on mounted after images loaded')
+                this.setPageMaxHeight();
+            }.bind(this))
+        }.bind(this),0)
     }
 }
 </script>
