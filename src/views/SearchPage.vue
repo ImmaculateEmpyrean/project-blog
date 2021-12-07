@@ -88,10 +88,10 @@ export default {
             fuzzySearchList: [],
             list: [], //list of all the names inside that are to be displayed in the search area now with respect to all pages.
 
-            tagsSearchCard0: ["Romance"],
-            tagsSearchCard1: [],
-            tagsSearchCard2: [],
-            tagsSearchCard3: [],
+            tagsSearchCard0: searchList[Object.keys(searchList)[0]].tags,
+            tagsSearchCard1: searchList[Object.keys(searchList)[1]].tags,
+            tagsSearchCard2: searchList[Object.keys(searchList)[2]].tags,
+            tagsSearchCard3: searchList[Object.keys(searchList)[3]].tags,
 
             imageSearchCard0: searchList[Object.keys(searchList)[0]].img,
             imageSearchCard1: searchList[Object.keys(searchList)[1]].img,
@@ -142,6 +142,7 @@ export default {
 
                 this.imageSearchCard3 = searchList[this.list[thirdIndex]].img;
                 this.titleSearchCard3 = this.list[thirdIndex];
+                this.tagsSearchCard3 = searchList[this.list[thirdIndex]].tags;
             }
             
             //turn on or off the third card
@@ -152,7 +153,8 @@ export default {
                 this.showSearchCard2 = true;
 
                 this.imageSearchCard2 = searchList[this.list[secondIndex]].img;
-                this.titleSearchCard2 = this.list[secondIndex]
+                this.titleSearchCard2 = this.list[secondIndex];
+                this.tagsSearchCard2 = searchList[this.list[secondIndex]].tags;
             }
 
             //turn on or off the second card
@@ -163,7 +165,8 @@ export default {
                 this.showSearchCard1 = true;
 
                 this.imageSearchCard1 = searchList[this.list[firstIndex]].img;
-                this.titleSearchCard1 = this.list[firstIndex]
+                this.titleSearchCard1 = this.list[firstIndex];
+                this.tagsSearchCard1 = searchList[this.list[firstIndex]].tags;
             }
 
             //turn on or off the first card
@@ -174,7 +177,8 @@ export default {
                 this.showSearchCard0 = true;
 
                 this.imageSearchCard0 = searchList[this.list[zeroIndex]].img;
-                this.titleSearchCard0 = this.list[zeroIndex]
+                this.titleSearchCard0 = this.list[zeroIndex];
+                this.tagsSearchCard0 = searchList[this.list[zeroIndex]].tags;
             }
         },
         hideSearchCards(){

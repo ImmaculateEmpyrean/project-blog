@@ -21,7 +21,7 @@
 <script>
 import {NCard} from 'naive-ui';
 import {isMobile} from '../javascript/breakpoints.js'
-import {tagColors} from '@/javascript/tagColors';
+import {tagColors} from '@/assets/json/tagColors';
 
 import Timer from "easytimer.js";
 
@@ -69,11 +69,10 @@ export default {
                 tag.classList.add("searchCardTag");
                 tag.innerHTML = `<h3 class="bodyText text-smaller">${tagName}</h3>`
 
-                tag.style.borderColor = tagColors[tagName].textColor;
-                tag.style.backgroundColor = tagColors[tagName].color;
+                tag.style.backgroundColor = tagColors[tagName];
                 
                 let innerTextNode = tag.querySelector('h3');
-                innerTextNode.style.color = tagColors[tagName].textColor;
+                innerTextNode.style.color = "#FFF";
 
                 tagWrapper.appendChild(tag);
             });
@@ -154,7 +153,6 @@ export default {
 <style lang="scss">
     .searchCardTag{
         padding: var(--spacing-small);
-        border: 1px solid;
         border-radius: 5%;
     }
 </style>

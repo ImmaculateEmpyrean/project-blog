@@ -9,39 +9,20 @@ export let searchList = {
         img: require("@/assets/img/koiChoco.jpg"),
         tags:[
             "Romance",
-            "Friendship",
-            "Male Protagonist",
-            "Multiple Endings",
-            "Only Good Endings",
-            "Central Heroine"
+            "Drama",
+            "Action",
+            "Fantasy"
         ]
     },
-    "White Album 2 ~Introductory Chapter~": {
-        name:"White Album 2 ~Introductory Chapter~",
-        aliases:["WHITE ALBUM2 -i.c.-","WA2ic"],
-        postLink: "/whiteAlbum2Intro",
+    "White Album 2": {
+        name:"White Album 2",
+        aliases:["WHITE ALBUM2 -i.c.-","WA2ic", "WHITE ALBUM2 -c.c.-","WA2cc"],
+        postLink: "/whiteAlbum2",
         developer: ["Leaf","Sting"],
         img: require("@/assets/img/whiteAlbum2.jpg"),
         tags:[
             "Romance",
-            "Dramatic Love Triangle",
-            "Kinetic Novel",
-            "Male Protagonist"
-        ]
-    },
-    "White Album 2 ~Closing Chapter~": {
-        name:"White Album 2 ~Closing Chapter~",
-        aliases:["WHITE ALBUM2 -c.c.-","WA2cc"],
-        postLink: "/whiteAlbum2ClosingChapter",
-        developer: ["Leaf","Sting"],
-        img: require("@/assets/img/whiteAlbum2ClosingChapter.jpg"),
-        tags:[
-            "Romance",
-            "Journalist Protagonist",
-            "Multiple Endings",
-            "Dramatic Love Triangle",
-            "Adult Heroine",
-            "Male Protagonist"
+            "Drama"
         ]
     },
     "ef - a fairy tale of two": {
@@ -52,8 +33,8 @@ export let searchList = {
         img: require("@/assets/img/EfATaleOfTwo.jpg"),
         tags:[
             "Romance",
-            "Multiple Protagonists",
-            "Mystery"
+            "Drama",
+            "Thriller",
         ]
     },
     "Phenomeno - Mitsurugi Yoishi wa Kowagaranai": {
@@ -64,9 +45,7 @@ export let searchList = {
         img: require("@/assets/img/phenomeno.jpg"),
         tags:[
             "Horror",
-            "Kinetic Novel",
-            "Male Protagonist",
-            "Mystery"
+            "Thriller",
         ]
     },
     "Cartagra ~Tsuki Kurui no Yamai~": {
@@ -76,10 +55,10 @@ export let searchList = {
         developer: ["Innocent Grey"],
         img: require("@/assets/img/cartagra.jpg"),
         tags:[
-            "Detective Work",
-            "Multiple Endings",
-            "Crime",
-            "Horror"    
+            "Romance",
+            "Drama",
+            "Horror",
+            "Thriller"
         ]
     },
     "Clannad": {
@@ -90,8 +69,7 @@ export let searchList = {
         img: require("@/assets/img/clannad.png"),
         tags:[
             "Romance",
-            "Family",
-            "Unlockable Epilogue",
+            "Drama",
             "Comedy"
         ]
     },
@@ -103,8 +81,7 @@ export let searchList = {
         img: require("@/assets/img/crescendo.png"),
         tags:[
             "Romance",
-            "High School",
-            "Male Protaganist"
+            "Drama"
         ]
     },
     "Kara no Shoujo - The Second Episode": {
@@ -114,9 +91,9 @@ export let searchList = {
         developer: ["Innocent Grey"],
         img: require("@/assets/img/karaNoShojo2.jpg"),
         tags:[
-            "Mystery",
-            "Detective Work",
-            "Male Protagonist"
+            "Drama",
+            "Horror",
+            "Thriller"
         ]
     }
 }
