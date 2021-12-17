@@ -97,3 +97,17 @@ export let searchList = {
         ]
     }
 }
+
+export let generatePublisherList = function(){
+    let publishers = new Set();
+    
+    let searchListKeys = Object.keys(searchList);
+    searchListKeys.forEach(function(key){
+        let element = searchList[key]
+        element.developer.forEach(function(developer){
+            publishers.add(developer)
+        })
+    });
+
+    return [...publishers];
+} 

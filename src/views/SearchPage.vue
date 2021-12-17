@@ -1,10 +1,10 @@
 <template>
     <div class="searchPage">
         <div class="buttonRack bodyText" id="buttonRack">
-            <SelectTagsButton />
-            <BlackListButton />
-            <PublisherTagsButton />
-            <SortByButton />
+            <SelectTagsButton    @tags:changed="selectTagsChanged"/>
+            <BlackListButton     @tags:changed="blackListTagsChanged"/>
+            <PublisherTagsButton @tags:changed="publisherTagsChanged"/>
+            <SortByButton @tag:changed="sortTagChanged"/>
         </div>
 
         <div class="searchShowArea" id="searchShowArea">
@@ -12,39 +12,12 @@
 
             <div class="searchCardArea" id="searchCardArea">
                 <SearchCard
-                    :propShow   ="showSearchCard0"
-                    :cardTitle  ="titleSearchCard0"
-                    :imageLink  ="imageSearchCard0"
-                    :tags       ="tagsSearchCard0"
+                    v-for="n in 4" :key="`${n-1}SearchCard`"
 
-                    @cardDisplayed="fixPageHeight"
-                />
-
-                <SearchCard
-                    :propShow   ="showSearchCard1"
-                    :cardTitle  ="titleSearchCard1"
-                    :imageLink  ="imageSearchCard1"
-                    :tags       ="tagsSearchCard1"
-
-                    @cardDisplayed="fixPageHeight"
-                />
-
-                <SearchCard
-                    :propShow   ="showSearchCard2"
-                    :cardTitle  ="titleSearchCard2"
-                    :imageLink  ="imageSearchCard2"
-                    :tags       ="tagsSearchCard2"
-
-                    @cardDisplayed="fixPageHeight"
-                />
-
-                <SearchCard
-                    :propShow   ="showSearchCard3"
-                    :cardTitle  ="titleSearchCard3"
-                    :imageLink  ="imageSearchCard3"
-                    :tags       ="tagsSearchCard3"
-
-                    @cardDisplayed="fixPageHeight"
+                    :propShow   ="showSearchCard[n-1]"
+                    :cardTitle  ="searchCardTitle[n-1]"
+                    :imageLink  ="searchCardImage[n-1]"
+                    :tags       ="searchCardTags[n-1]"
                 />
             </div>
 
@@ -55,226 +28,86 @@
 </template>
 
 <script>
-import {searchList} from '@/assets/json/searchList.js';
+import {searchList, generatePublisherList} from '@/assets/json/searchList.js';
 import FuzzySet from 'fuzzyset.js';
-import {allImagesOnPageLoaded} from '../javascript/imageLoaderCore.js';
+import {tagColors}  from '@/assets/json/tagColors.js';
+
+import Pagination from '@/components/Pagination.vue';
+import SearchCard from '@/components/SearchCard.vue';
 
 import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
 import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
 import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
 import SortByButton from '@/components/SearchPage/SortByButton.vue';
 
-import Pagination from '@/components/Pagination.vue';
-import SearchCard from '@/components/SearchCard.vue';
-
 export default {
-    name: "Search",
+    name: "SearchPage",
     components:{
         Pagination,
+        SearchCard,
+
         SelectTagsButton,
         BlackListButton,
         PublisherTagsButton,
-        SortByButton,
-
-        SearchCard
+        SortByButton
     },
     data(){
         return{
             pageCount: 2,
             currentPage: 1,
-            noResultsFound: false,
-            
-            searchAreaElements: null,
-            fuzzySearchList: [],
-            list: [], //list of all the names inside that are to be displayed in the search area now with respect to all pages.
 
-            tagsSearchCard0: searchList[Object.keys(searchList)[0]].tags,
-            tagsSearchCard1: searchList[Object.keys(searchList)[1]].tags,
-            tagsSearchCard2: searchList[Object.keys(searchList)[2]].tags,
-            tagsSearchCard3: searchList[Object.keys(searchList)[3]].tags,
+            titleNameList: FuzzySet(Object.keys(searchList)),
 
-            imageSearchCard0: searchList[Object.keys(searchList)[0]].img,
-            imageSearchCard1: searchList[Object.keys(searchList)[1]].img,
-            imageSearchCard2: searchList[Object.keys(searchList)[2]].img,
-            imageSearchCard3: searchList[Object.keys(searchList)[3]].img,
+            showSearchCard: [false,false,false,false],
+            searchCardTitle: ["noTitle","noTitle","noTitle","noTitle"],
+            searchCardImage: [require('@/assets/img/noImage.png'),require('@/assets/img/noImage.png'),require('@/assets/img/noImage.png'),require('@/assets/img/noImage.png')],
+            searchCardTags: [[],[],[],[]],
 
-            titleSearchCard0: Object.keys(searchList)[0],
-            titleSearchCard1: Object.keys(searchList)[1],
-            titleSearchCard2: Object.keys(searchList)[2],
-            titleSearchCard3: Object.keys(searchList)[3],
-
-            showSearchCard0: true,
-            showSearchCard1: true,
-            showSearchCard2: true,
-            showSearchCard3: true,
-        }
-    },
-    methods:{
-        searchPageUpdated(page){
-            this.currentPage = page;
-            this.populateSearchCards();
-        },
-        createSearchListFromManifest(){
-            let list = Object.keys(searchList);
-
-            this.fuzzySearchList = FuzzySet(list); //create a fuzzy list from the array of names I have.
-            this.list = list;
-        },
-        updatePagination(){
-            let numberOfItems = this.list.length; 
-
-            this.currentPage = 1;
-            this.pageCount = parseInt(numberOfItems / 4);
-            if(numberOfItems % 4 > 0){
-                this.pageCount = this.pageCount + 1;
-            }
-                
-        },
-        populateSearchCards(){
-            console.log('populating search cards')
-            
-            //turn on or off the fourth card
-            let thirdIndex = (this.currentPage * 4) - 1;
-            if(this.list.length - 1 < thirdIndex)
-                this.showSearchCard3 = false;
-            else {
-                this.showSearchCard3 = true;
-
-                this.imageSearchCard3 = searchList[this.list[thirdIndex]].img;
-                this.titleSearchCard3 = this.list[thirdIndex];
-                this.tagsSearchCard3 = searchList[this.list[thirdIndex]].tags;
-            }
-            
-            //turn on or off the third card
-            let secondIndex = (this.currentPage * 4) - 2;
-            if(this.list.length - 1 < secondIndex)
-                this.showSearchCard2 = false;
-            else {
-                this.showSearchCard2 = true;
-
-                this.imageSearchCard2 = searchList[this.list[secondIndex]].img;
-                this.titleSearchCard2 = this.list[secondIndex];
-                this.tagsSearchCard2 = searchList[this.list[secondIndex]].tags;
-            }
-
-            //turn on or off the second card
-            let firstIndex = (this.currentPage * 4) - 3;
-            if(this.list.length - 1 < firstIndex)
-                this.showSearchCard1 = false;
-            else {
-                this.showSearchCard1 = true;
-
-                this.imageSearchCard1 = searchList[this.list[firstIndex]].img;
-                this.titleSearchCard1 = this.list[firstIndex];
-                this.tagsSearchCard1 = searchList[this.list[firstIndex]].tags;
-            }
-
-            //turn on or off the first card
-            let zeroIndex = (this.currentPage * 4) - 4;
-            if(this.list.length - 1 < zeroIndex)
-                this.showSearchCard0 = false;
-            else {
-                this.showSearchCard0 = true;
-
-                this.imageSearchCard0 = searchList[this.list[zeroIndex]].img;
-                this.titleSearchCard0 = this.list[zeroIndex];
-                this.tagsSearchCard0 = searchList[this.list[zeroIndex]].tags;
-            }
-        },
-        hideSearchCards(){
-            this.showSearchCard0 = false;
-            this.showSearchCard1 = false;
-            this.showSearchCard2 = false;
-            this.showSearchCard3 = false;
-        },
-
-
-        setPageMaxHeight(){
-            let buttonRack = this.$el.querySelector('#buttonRack');
-            let buttonRackStyle = window.getComputedStyle(buttonRack);
-            let buttonRackHeight = parseInt(buttonRackStyle.getPropertyValue('height'))
-
-            let searchShowArea = this.$el.querySelector('#searchShowArea');
-            
-            let searchCardArea = this.$el.querySelector('#searchCardArea')
-            let searchCardAreaStyle = window.getComputedStyle(searchCardArea);
-            let searchCardAreaMarginHeight = parseInt(searchCardAreaStyle.getPropertyValue('margin-top')) + parseInt(searchCardAreaStyle.getPropertyValue('margin-bottom'));
-
-            let searchShowAreaChildren = searchShowArea.childNodes;
-
-            let showAreaHeight = 0;
-            searchShowAreaChildren.forEach(function(element){
-                showAreaHeight = showAreaHeight + element.offsetHeight;
-            })
-
-            this.$el.style.maxHeight = `${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`;
-            // console.log(`setting search page height : ${showAreaHeight + buttonRackHeight + searchCardAreaMarginHeight}px`)
-            // console.log(`showAreaHeight: ${showAreaHeight}`)
-        },
-        fixPageHeight(){
-            allImagesOnPageLoaded(function(){
-                console.log('setting height')
-                this.setPageMaxHeight();
-            }.bind(this))
+            selectTags: Object.keys(tagColors),
+            blackListTags: [],
+            selectPublisherTags: generatePublisherList(),
+            sortTag: true
         }
     },
     watch:{
         searchBarValue: {
             handler(valueElement){
-                this.hideSearchCards();
-
-                if(valueElement.searchBarValue === ''){
-                    this.list = this.fuzzySearchList.values();
-                    this.updatePagination();
-                    this.populateSearchCards();
-                    return;
-                }
-
-                //the 0.05 is the minimum similarity required for a match.. I dunno the exact maths but 0.01 seems to work?.
-                this.list = this.fuzzySearchList.get(valueElement.searchBarValue,[],0.01);
-                this.list = this.list.map(function(element){
-                    return element[1]
-                })
-                
-                if(this.list.length === 0){
-                    this.currentPage = 1;
-                    this.pageCount = 1;
-
-                    this.noResultsFound = true;
-                    this.populateSearchCards();
-                }
-                else{
-                    this.updatePagination();
-                    this.noResultsFound = false;
-
-                    this.populateSearchCards();
-                }
+                let newSearchValue = valueElement.searchBarValue;
+                console.log(newSearchValue);
             },
             deep: true,
             immediate: false
+        },
+    },
+    methods:{
+        selectTagsChanged(newSelectTags){
+            console.log('new select tags')
+            this.selectTags = newSelectTags;
+            console.log(this.selectTags)
+            this.search();
+        },
+        blackListTagsChanged(newBlacklistTags){
+            this.blackListTags = newBlacklistTags;
+            this.search();
+        },
+        publisherTagsChanged(newPublisherTags){
+            this.selectPublisherTags = newPublisherTags;
+            this.search();
+        },
+        sortTagChanged(newSortTag){
+            this.sortTag = newSortTag
+            this.search();
+        },
+
+        search(){
+            console.log('search function called')
+        },
+
+        searchPageUpdated(newPage){
+            this.currentPage = newPage;
         }
     },
-    inject:["searchBarValue"],
-    mounted(){
-        //create the search list from the manifest in posession
-        this.createSearchListFromManifest();
-
-        //update pagination properly
-        this.updatePagination();
-
-        //get the search area elements from the browser dom
-        this.searchAreaElements = document.querySelectorAll('#searchCardArea > *');
-
-        this.populateSearchCards();
-
-        // Initialize the height of the show area for some reason doing last on the current stack seems to work.. 
-        setTimeout(function(){
-            allImagesOnPageLoaded(function(){
-                console.log('setting height on mounted after images loaded')
-                this.setPageMaxHeight();
-            }.bind(this))
-        }.bind(this),0)
-    }
+    inject:["searchBarValue"]
 }
 </script>
 
