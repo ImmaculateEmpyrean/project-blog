@@ -39,7 +39,6 @@ export default {
     methods: {
         setBlogTheme(){
             this.blogTheme = getBlogTheme();
-            console.log('set blog theme')
         },
 
         searchBarUpdated(payload){

@@ -1,7 +1,6 @@
 import {isMobile,isTablet,isDesktop} from '../breakpoints.js';
 
 let {commonVariables} = require('./common.js');
-console.log(commonVariables)
 
 let {desktopVariables} = require('./desktopVariables.js');
 let {tabletVariables} = require('./tabletVariables.js');
