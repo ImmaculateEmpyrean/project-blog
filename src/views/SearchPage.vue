@@ -93,7 +93,6 @@ export default {
         },
         sortTagChanged(newSortTag){
             this.sortAscending = newSortTag
-            console.log('reee')
             this.searchAndUpdate();
         },
 
@@ -159,16 +158,10 @@ export default {
                 return inclusionFlag;
             }.bind(this))
 
-            console.log(list)
             //sort by ascending or descending order
-            if(this.sortAscending === true)
-                list.sort(Intl.Collator().compare);
-            else {
-                console.log('descending sort')
-                list.sort(Intl.Collator().compare)
+            list.sort(Intl.Collator().compare);
+            if(this.sortAscending === false)
                 list.reverse();
-            }
-            console.log(list)
 
             this.pageCount = Math.ceil(list.length / 4);
             if(this.currentPage > this.pageCount)
