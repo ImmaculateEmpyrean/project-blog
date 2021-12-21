@@ -104,7 +104,7 @@ export default {
             if(searchBarValue === '')
                 list = this.titleNameList.values();
             else{
-                list = this.titleNameList.get(searchBarValue);
+                list = this.titleNameList.get(searchBarValue,[]);
                 list = list.map(function(element){
                     return element[1];
                 })
