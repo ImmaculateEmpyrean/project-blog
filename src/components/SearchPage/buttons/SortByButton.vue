@@ -10,7 +10,8 @@
             ref="modal"
         >
             <template #content>
-                <n-radio-group v-model:value="value" name="selectSortBy">
+                <!-- not moblie radio button -->
+                <n-radio-group v-model:value="value" name="selectSortBy" v-show="!isMobile">
                     <n-radio-button value="ascending">
                         Ascending Order Alphabetically By Title
                     </n-radio-button>
@@ -18,6 +19,19 @@
                         Descending Order Alphabetically By Title
                     </n-radio-button>
                 </n-radio-group>
+
+                <!-- the radio button on mobile -->
+                <n-radio-group v-model:value="value" name="selectSortBy" v-show="isMobile">
+                    <n-radio-button value="ascending">
+                        Ascending Order
+                    </n-radio-button>
+                </n-radio-group>
+                <n-radio-group v-model:value="value" name="selectSortBy" v-show="isMobile">
+                    <n-radio-button value="descending">
+                        Descending Order
+                    </n-radio-button>
+                </n-radio-group>
+
             </template>
         </Modal>
     </div>
@@ -27,6 +41,8 @@
 import {NRadioGroup,NRadioButton} from 'naive-ui';
 import Button from '@/components/Wrappers/Button.vue';
 import Modal from "@/components/Wrappers/Modal.vue";
+
+import {isMobile} from '@/javascript/breakpoints.js';
 
 export default {
     name: "SelectTagsButton",
@@ -61,6 +77,10 @@ export default {
     methods:{
         handleButtonClick(){
             this.$refs.modal.show();
+        },
+
+        isMobile(){
+            return isMobile();
         }
     },
     created(){
@@ -82,8 +102,23 @@ export default {
         }
     }
 
-    .n-tag{
-        margin-right: var(--spacing-normal);
-        padding: var(--spacing-normal);
+    .n-radio-group{
+        width: 100%;
+        text-align: center;
+
+        .n-radio-button{
+            width: 100%;
+        }
     }
+    @include for-tablet-portrait-up{
+        .n-radio-group{
+        width: auto;
+        text-align: left;
+
+        .n-radio-button{
+            width: auto;
+        }
+    }
+    }
+    
 </style>

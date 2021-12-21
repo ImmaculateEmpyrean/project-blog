@@ -86,7 +86,11 @@ export default {
     }
 
     .n-tag{
-        margin-right: var(--spacing-normal);
+        margin: var(--spacing-normal);
+        @include for-tablet-portrait-up{
+            margin: var(--spacing-small);
+        }
+
         padding: var(--spacing-normal);
     }
 </style>
