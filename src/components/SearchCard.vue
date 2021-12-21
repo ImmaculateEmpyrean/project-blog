@@ -3,7 +3,7 @@
     @after-leave="cardHiddenSuccessfully"
     @after-enter="cardDisplayedSuccessfully">
 
-        <n-card hoverable title="Card with Cover" v-show="show & propShow">
+        <n-card hoverable class="searchCard" title="Card with Cover" v-show="show & propShow">
             <template #cover>
                 <img :src="imageLinkData" />
             </template>

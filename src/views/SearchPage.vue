@@ -103,9 +103,26 @@ export default {
             console.log('search function called')
         },
 
+
+
         searchPageUpdated(newPage){
             this.currentPage = newPage;
         }
+    },
+    mounted(){
+        for(let i=0;i<4;i++){
+            this.showSearchCard[i] = true;
+        }
+
+       let searchCardArea = document.getElementById('searchCardArea');
+       searchCardArea.style.height = "0px";
+
+       let searchCards = this.$el.querySelectorAll('.searchCard');
+       searchCards.forEach(function(card){
+           card.addEventListener('animationend',function(){
+               searchCardArea.style.height = `${searchCardArea.scrollHeight}px`;
+           })
+       })
     },
     inject:["searchBarValue"]
 }
@@ -116,13 +133,11 @@ export default {
     @import '../assets/scss/columns.scss';
     
     .searchPage{
-        transition: max-height ease-in-out 2s;
+        transition: height ease-in-out 2s;
         overflow-y: hidden;
-        height: 999999px;
-
+        
         min-height: 85vh;
         
-
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -160,6 +175,9 @@ export default {
     }
     
     .searchCardArea{
+        transition: height 2s ease-in-out;
+        overflow-y: hidden;
+
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
