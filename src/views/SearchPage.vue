@@ -71,9 +71,8 @@ export default {
     },
     watch:{
         searchBarValue: {
-            handler(valueElement){
-                let newSearchValue = valueElement.searchBarValue;
-                console.log(newSearchValue);
+            handler(){
+                this.searchAndUpdate();
             },
             deep: true,
             immediate: false
@@ -82,22 +81,22 @@ export default {
     methods:{
         selectTagsChanged(newSelectTags){
             this.selectTags = newSelectTags;
-            this.search();
+            this.searchAndUpdate();
         },
         blackListTagsChanged(newBlacklistTags){
             this.blackListTags = newBlacklistTags;
-            this.search();
+            this.searchAndUpdate();
         },
         publisherTagsChanged(newPublisherTags){
             this.selectPublisherTags = newPublisherTags;
-            this.search();
+            this.searchAndUpdate();
         },
         sortTagChanged(newSortTag){
             this.sortAscending = newSortTag
-            this.search();
+            this.searchAndUpdate();
         },
 
-        search(){
+        searchAndUpdate(){
             let list = [];
             let {searchBarValue} = this.searchBarValue;
 
@@ -164,20 +163,39 @@ export default {
                 list.sort(function(a, b){return a-b});
             else list.sort(function(a, b){return b-a});
 
-            console.log(list)
+            // this.currentPage = 1;
+            this.pageCount = Math.ceil(list.length / 4);
+            this.updateSearchCardArea(list);
+        },
+        updateSearchCardArea(list){
+            let currentPage = this.currentPage;
+            for(let i = 0 ;i< 4;i++)
+                this.showSearchCard[i] = false;
+
+            let counter = 0;
+            for(let i = (currentPage - 1) * 4; i < list.length; i++){
+                let element = searchList[list[i]];
+
+                this.searchCardTitle[counter] = list[i];
+                this.searchCardImage[counter] = element.img;
+                this.searchCardTags[counter] = element.tags;
+
+                this.showSearchCard[counter] = true;
+
+                counter++;
+                if(counter === 4)
+                    break;
+            }
         },
 
 
 
         searchPageUpdated(newPage){
             this.currentPage = newPage;
+            this.searchAndUpdate();
         }
     },
     mounted(){
-        for(let i=0;i<4;i++){
-            this.showSearchCard[i] = true;
-        }
-
        let searchCardArea = document.getElementById('searchCardArea');
        searchCardArea.style.height = "0px";
 
@@ -187,6 +205,8 @@ export default {
                searchCardArea.style.height = `${searchCardArea.scrollHeight}px`;
            })
        })
+
+       this.searchAndUpdate();
     },
     inject:["searchBarValue"]
 }
