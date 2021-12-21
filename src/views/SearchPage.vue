@@ -81,9 +81,7 @@ export default {
     },
     methods:{
         selectTagsChanged(newSelectTags){
-            console.log('new select tags')
             this.selectTags = newSelectTags;
-            console.log(this.selectTags)
             this.search();
         },
         blackListTagsChanged(newBlacklistTags){
@@ -100,7 +98,38 @@ export default {
         },
 
         search(){
-            console.log('search function called')
+            let list = [];
+            let {searchBarValue} = this.searchBarValue;
+
+            //populate the list
+            if(searchBarValue === '')
+                list = this.titleNameList.values();
+            else{
+                list = this.titleNameList.get(searchBarValue);
+                list = list.map(function(element){
+                    return element[1];
+                })
+            }
+
+            //include only selected tags in the final result..
+            list = list.filter(function(element){
+                let elementTags = searchList[element].tags
+                let inclusionFlag = false;
+
+                for(let i=0;i<elementTags.length;i++){
+                    for(let j=0; j < this.selectTags.length; j++)
+                    if(elementTags[i] === this.selectTags[j]){
+                        inclusionFlag = true;
+                        break;
+                    }
+                }
+
+                return inclusionFlag;
+            }.bind(this))
+
+            //exclude blacklist tags in the final result
+
+            console.log(list)
         },
 
 
