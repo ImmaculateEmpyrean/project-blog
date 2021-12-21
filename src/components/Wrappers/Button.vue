@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {isMobile} from '../javascript/breakpoints.js';
+import {isMobile} from '@/javascript/breakpoints.js';
 import {NButton} from 'naive-ui';
 
 export default {

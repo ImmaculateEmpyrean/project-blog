@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use "../assets/scss/setting" as *;
+    @use "@/assets/scss/setting" as *;
 
     .n-card.n-modal{
         width: 85vw;

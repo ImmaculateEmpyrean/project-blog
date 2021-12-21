@@ -89,15 +89,15 @@
 <script>
 import {isMobile} from '@/javascript/breakpoints.js';
 
-import KoiChoco from '../components/MainFeedWidget/finishedWidgets/LatestPosts/KoiChoco.vue';
-import WhiteAlbum2 from '../components/MainFeedWidget/finishedWidgets/LatestPosts/WhiteAlbum2.vue';
-import Ef from '../components/MainFeedWidget/finishedWidgets/LatestPosts/EfATaleOfTwo.vue'; 
+import KoiChoco from '@/components/HomePage/MainFeedWidget/finishedWidgets/LatestPosts/KoiChoco.vue';
+import WhiteAlbum2 from '@/components/HomePage/MainFeedWidget/finishedWidgets/LatestPosts/WhiteAlbum2.vue';
+import Ef from '@/components/HomePage/MainFeedWidget/finishedWidgets/LatestPosts/EfATaleOfTwo.vue'; 
 
-import Clannad from '../components/MainFeedWidget/finishedWidgets/EditorsPickPosts/Clannad.vue';
-import Cartagra from '../components/MainFeedWidget/finishedWidgets/EditorsPickPosts/Cartagra.vue';
-import Phenomeno from '../components/MainFeedWidget/finishedWidgets/EditorsPickPosts/Phenomeno.vue';
+import Clannad from '@/components/HomePage/MainFeedWidget/finishedWidgets/EditorsPickPosts/Clannad.vue';
+import Cartagra from '@/components/HomePage/MainFeedWidget/finishedWidgets/EditorsPickPosts/Cartagra.vue';
+import Phenomeno from '@/components/HomePage/MainFeedWidget/finishedWidgets/EditorsPickPosts/Phenomeno.vue';
 
-import RecommendationsWidget from '../components/RecommendationsWidget/Widget.vue';
+import RecommendationsWidget from '@/components/HomePage/RecommendationsWidget/Widget.vue';
 
 export default {
     name: 'Home',

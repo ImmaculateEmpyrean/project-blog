@@ -22,7 +22,7 @@
 
 <script>
 import {NCard} from 'naive-ui';
-import {isMobile} from '../javascript/breakpoints.js'
+import {isMobile} from '@/javascript/breakpoints.js'
 import {tagColors} from '@/assets/json/tagColors';
 
 import Timer from "easytimer.js";
@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use '../assets/scss/setting' as *;
+    @use '@/assets/scss/setting' as *;
 
     .n-card {
         flex: 1 1 100%;

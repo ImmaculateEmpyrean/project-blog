@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use '../../assets/scss/setting' as *;
+    @use '@/assets/scss/setting' as *;
 
     .RecommendationsWidget{
         margin: var(--spacing-large) 0;

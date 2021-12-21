@@ -24,8 +24,8 @@
 import {tagColors} from '@/assets/json/tagColors.js';
 
 import {NTag} from 'naive-ui';
-import Button from '@/components/Button.vue';
-import Modal from "@/components/Modal.vue";
+import Button from '@/components/Wrappers/Button.vue';
+import Modal from "@/components/Wrappers/Modal.vue";
 
 export default {
     name: "SelectTagsButton",
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use '../../assets/scss/setting' as *;
+    @use '@/assets/scss/setting' as *;
 
     .selectTagsButton{
         flex: 1 1 100%;

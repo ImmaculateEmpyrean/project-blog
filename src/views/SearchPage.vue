@@ -32,13 +32,13 @@ import {searchList, generatePublisherList} from '@/assets/json/searchList.js';
 import FuzzySet from 'fuzzyset.js';
 import {tagColors}  from '@/assets/json/tagColors.js';
 
-import Pagination from '@/components/Pagination.vue';
-import SearchCard from '@/components/SearchCard.vue';
+import Pagination from '@/components/Wrappers/Pagination.vue';
+import SearchCard from '@/components/SearchPage/SearchCard.vue';
 
-import SelectTagsButton from '@/components/SearchPage/SelectTagsButton.vue';
-import BlackListButton from '@/components/SearchPage/BlackListTagsButton.vue';
-import PublisherTagsButton from '@/components/SearchPage/PublisherTagsButton.vue';
-import SortByButton from '@/components/SearchPage/SortByButton.vue';
+import SelectTagsButton from '@/components/SearchPage/buttons/SelectTagsButton.vue';
+import BlackListButton from '@/components/SearchPage/buttons/BlackListTagsButton.vue';
+import PublisherTagsButton from '@/components/SearchPage/buttons/PublisherTagsButton.vue';
+import SortByButton from '@/components/SearchPage/buttons/SortByButton.vue';
 
 export default {
     name: "SearchPage",
@@ -215,8 +215,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use '../assets/scss/setting' as *;
-    @import '../assets/scss/columns.scss';
+    @use '@/assets/scss/setting' as *;
+    @import '@/assets/scss/columns.scss';
     
     .searchPage{
         transition: height ease-in-out 2s;

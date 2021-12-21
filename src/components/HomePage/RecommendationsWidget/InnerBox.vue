@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use '../../assets/scss/setting' as *;
+    @use '@/assets/scss/setting' as *;
 
     .innerBoxRecommendationsWidget{
         flex: 0 0 45%;

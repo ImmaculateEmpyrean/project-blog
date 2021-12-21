@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {isMobile} from '../../javascript/breakpoints.js';
+import {isMobile} from '@/javascript/breakpoints.js';
 
 export default {
     name: "MainFeedWidget",
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @use '../../assets/scss/setting' as *;
+    @use '@/assets/scss/setting' as *;
 
     .MainFeedWidget{
         flex: 1 1 100%;
