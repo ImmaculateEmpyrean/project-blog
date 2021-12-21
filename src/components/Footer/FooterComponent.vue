@@ -115,6 +115,7 @@ footer{
         input{
             width: 80%;
             height: 100%;
+            padding-left: var(--spacing-small);
 
             outline: none;
         }
