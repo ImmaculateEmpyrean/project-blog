@@ -6,7 +6,7 @@
             </template>
         </Button>
         <Modal
-            cardTitle="Select Tags"
+            cardTitle="Select Publisher Tags"
             ref="modal"
         >
             <template #content>

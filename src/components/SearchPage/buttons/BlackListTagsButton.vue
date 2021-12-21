@@ -6,7 +6,7 @@
             </template>
         </Button>
         <Modal
-            cardTitle="Select Tags"
+            cardTitle="BlackList Tags"
             ref="modal"
         >
             <template #content>

@@ -6,7 +6,7 @@
             </template>
         </Button>
         <Modal
-            cardTitle="Select Tags"
+            cardTitle="Sort By -"
             ref="modal"
         >
             <template #content>
