@@ -208,6 +208,10 @@ export default {
            })
        })
 
+        window.addEventListener("resize",function(){
+            searchCardArea.style.height = `${searchCardArea.scrollHeight}px`;
+        }.bind(this));
+
        this.searchAndUpdate();
     },
     inject:["searchBarValue"]
