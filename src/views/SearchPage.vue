@@ -104,7 +104,7 @@ export default {
             if(searchBarValue === '')
                 list = this.titleNameList.values();
             else{
-                list = this.titleNameList.get(searchBarValue,[]);
+                list = this.titleNameList.get(searchBarValue,[],0.01);
                 list = list.map(function(element){
                     return element[1];
                 })
@@ -163,8 +163,11 @@ export default {
                 list.sort(function(a, b){return a-b});
             else list.sort(function(a, b){return b-a});
 
-            // this.currentPage = 1;
+            
             this.pageCount = Math.ceil(list.length / 4);
+            if(this.currentPage > this.pageCount)
+                this.currentPage = 1;
+
             this.updateSearchCardArea(list);
         },
         updateSearchCardArea(list){
