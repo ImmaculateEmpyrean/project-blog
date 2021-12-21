@@ -66,7 +66,7 @@ export default {
             selectTags: Object.keys(tagColors),
             blackListTags: [],
             selectPublisherTags: generatePublisherList(),
-            sortTag: true
+            sortAscending: true
         }
     },
     watch:{
@@ -93,7 +93,7 @@ export default {
             this.search();
         },
         sortTagChanged(newSortTag){
-            this.sortTag = newSortTag
+            this.sortAscending = newSortTag
             this.search();
         },
 
@@ -128,6 +128,41 @@ export default {
             }.bind(this))
 
             //exclude blacklist tags in the final result
+            list = list.filter(function(element){
+                let elementTags = searchList[element].tags
+                let inclusionFlag = true;
+
+                for(let i=0;i<elementTags.length;i++){
+                    for(let j=0; j < this.blackListTags.length; j++)
+                    if(elementTags[i] === this.blackListTags[j]){
+                        inclusionFlag = false;
+                        break;
+                    }
+                }
+
+                return inclusionFlag;
+            }.bind(this))
+
+            //select by publishers in the curated result
+            list = list.filter(function(element){
+                let devloperTags = searchList[element].developer;
+                let inclusionFlag = false;
+
+                for(let i=0;i<devloperTags.length;i++){
+                    for(let j=0; j < this.selectPublisherTags.length; j++)
+                    if(devloperTags[i] === this.selectPublisherTags[j]){
+                        inclusionFlag = true;
+                        break;
+                    }
+                }
+
+                return inclusionFlag;
+            }.bind(this))
+
+            //sort by ascending or descending order
+            if(this.sortAscending)
+                list.sort(function(a, b){return a-b});
+            else list.sort(function(a, b){return b-a});
 
             console.log(list)
         },
