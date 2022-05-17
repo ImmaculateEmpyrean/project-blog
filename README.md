@@ -13,7 +13,7 @@
   - Butter Smooth Transition On Almost all of its components.
   - Components get resized on height in realtime using transition effects.
 
-# This Website is hosted live at the url: 
+# This Website is hosted live at the url: https://vn-blog.netlify.app/
 
 ---
 
